@@ -43,6 +43,23 @@ int sendSignedMessage(char* method, char* response, char* errorMessage, uint8_t 
     return 1;
 }
 
+int logCoordinates() {
+    int32_t latitude, longitude, altitude;
+
+    while(!getCoords(latitude, longitude, altitude)) {
+        fprintf(stderr, "[%s] Warning: Failed to get coordinates. Trying again in %d\n", ENTITY_NAME, RETRY_DELAY_SEC);
+        sleep(RETRY_DELAY_SEC);
+    }
+
+    fprintf(stderr, "[%s] Position:\n\tLatitude: %.5f\n\tLongitude: %.5f \n\tAltitude: %.5f cm\n",
+            ENTITY_NAME,
+            latitude / 1e7, 
+            longitude / 1e7, 
+            altitude);
+
+    return 1;
+}
+
 int main(void) {
     //Before do anything, we need to ensure, that other modules are ready to work
     while (!waitForInit("periphery_controller_connection", "PeripheryController")) {
@@ -126,8 +143,10 @@ int main(void) {
     //The flight is need to be controlled from now on
     //Also we need to check on ORVD, whether the flight is still allowed or it is need to be paused
 
-    while (true)
-        sleep(1000);
+    while (true) {
+        logCoordinates();
+        sleep(RETRY_DELAY_SEC);
+    }
 
     return EXIT_SUCCESS;
 }
