@@ -127,7 +127,11 @@ int main(void) {
     //Also we need to check on ORVD, whether the flight is still allowed or it is need to be paused
 
     while (true)
-        sleep(1000);
+    {
+        // validateCargo();
+        // validateSpeed();
+        // validateSpeed();
+    }
 
     return EXIT_SUCCESS;
 }
