@@ -57,3 +57,6 @@ mav.tlog.raw
 eeprom.bin
 logs
 terrain
+
+/.idea
+/cmake-build-debug
