@@ -1,5 +1,9 @@
+#include "./helpers.h"
+
 #pragma once
 
-void validateSpeed();
-void validatePosition();
-void validateCargo();
+int validateSpeed(DynamicPosition position);
+
+int validatePosition();
+
+int validateCargo(Position copterPosition, Position cargoPosition);

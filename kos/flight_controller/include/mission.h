@@ -1,4 +1,5 @@
 #pragma once
+
 #include <stdint.h>
 
 enum CommandType {
@@ -29,6 +30,7 @@ struct CommandWaypoint {
     }
 };
 
+
 struct CommandServo {
     int32_t number;
     int32_t pwm;
@@ -50,5 +52,17 @@ struct MissionCommand {
     CommandContent content;
 };
 
-int parseMission(char* response);
-void printMission();
+int parseMission(char *response);
+
+void printMissions();
+
+struct Position {
+    int32_t latitude;
+    int32_t longitude;
+    int32_t altitude;
+
+    Position(int32_t lat, int32_t lng, int32_t alt): latitude(lat), longitude(lng), altitude(alt) {
+    }
+};
+
+Position getCargoPosition();

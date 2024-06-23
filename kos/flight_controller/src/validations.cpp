@@ -1,14 +1,40 @@
 #include "../include/validations.h"
 #include "../include/helpers.h"
+#include "../../shared/include/ipc_messages_autopilot_connector.h"
+#include "../../shared/include/ipc_messages_periphery_controller.h"
 
-void validateSpeed() {
+#include <stdio.h>
 
+#define INACCURACY_CARGO 0.5 // Погрешность расстояния до сброса, м
+#define MAX_SPEED 5 // Максимальная скорость, м/c
+
+#define LOG_SPEED 1
+#define LOG_CARGO 1
+
+int validateSpeed(DynamicPosition position) {
+    double currentSpeed = getCurrentSpeed(position);
+
+    if (LOG_SPEED) {
+        fprintf(stderr, "[%s] DEBUG: Current speed: %.5f\n",
+                ENTITY_NAME,
+                currentSpeed);
+    }
+
+    if (currentSpeed > MAX_SPEED) {
+        changeSpeed(MAX_SPEED);
+    }
+
+    return 1;
 }
 
-void validatePosition(Position copter, ) {
+int validateCargo(Position copter, Position cargo) {
+    double distance = getDistance(copter, cargo);
 
-}
+    if (LOG_CARGO) {
+        fprintf(stderr, "[%s] DEBUG: Distance to cargo: %.5f\n",
+                ENTITY_NAME,
+                distance);
+    }
 
-void validateCargo() {
-
+    return setCargoLock(distance < INACCURACY_CARGO);
 }
