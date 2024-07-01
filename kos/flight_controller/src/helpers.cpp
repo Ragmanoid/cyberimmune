@@ -1,6 +1,8 @@
 #include "../include/helpers.h"
 #include "../../shared/include/ipc_messages_navigation_system.h"
 
+#include <coresrv/time/time_api.h>
+#include <rtl/rtc.h>
 #include <math.h>
 #include <chrono>
 #include <stdio.h>
@@ -8,12 +10,12 @@
 #define R_EARTH 6371009
 #define M_PI 3.14159265358979323846
 
-double toRadiansAngle(double coord) {
-    return coord * 10e-7 * M_PI / 180;
+double toRadiansAngle(int coord) {
+    return coord * 1e-7 * M_PI / 180;
 }
 
-double toMetersAltitude(double altitude) {
-    return altitude * 10e-2;
+double toMetersAltitude(int altitude) {
+    return altitude * 1e-2;
 }
 
 double getDistance(double lon, double dLon, double lat, double dLat) {
@@ -24,9 +26,9 @@ double getDistance(double lon, double dLon, double lat, double dLat) {
 }
 
 double getDistance(Position pos1, Position pos2) {
-    double dLon = toRadiansAngle(pos2.longitude - pos1.longitude);
-    double dLat = toRadiansAngle(pos2.latitude - pos1.latitude);
-    double dAlt = toMetersAltitude(pos2.altitude - pos1.altitude);
+    double dLon = toRadiansAngle(abs(pos2.longitude - pos1.longitude));
+    double dLat = toRadiansAngle(abs(pos2.latitude - pos1.latitude));
+    double dAlt = toMetersAltitude(abs(pos2.altitude - pos1.altitude));
 
     return sqrt(
             pow(getDistance(
@@ -39,40 +41,47 @@ double getDistance(Position pos1, Position pos2) {
 }
 
 Position getCopterPosition(Position position) {
-    int32_t latitude, longitude, altitude;
+    int latitude, longitude, altitude;
 
     if (!getCoords(latitude, longitude, altitude)) {
         fprintf(stderr, "[%s] Warning: Failed to get coordinates\n", ENTITY_NAME);
         return position;
     }
 
-    fprintf(stderr, "[%s] Copter position:\n\tLatitude: %.5f\n\tLongitude: %.5f \n\tAltitude: %.5f cm\n",
-            ENTITY_NAME,
-            latitude / 1e7,
-            longitude / 1e7,
-            altitude);
-
     position.latitude = latitude;
     position.longitude = longitude;
     position.altitude = altitude;
 
+
+    fprintf(stderr, "[%s] Copter position:\n\tLatitude: %.5f\n\tLongitude: %.5f \n\tAltitude: %.5f\n",
+            ENTITY_NAME,
+            position.latitude / 1e7,
+            position.longitude / 1e7,
+            position.altitude / 1e2);
+
     return position;
 }
 
-long currentTime() {
-    namespace sc = std::chrono;
+// review: lapin.m
+long double currentTime() {
+    RtlTimeSpec time;
 
-    auto time = sc::system_clock::now(); // get the current time
+    if (KnGetSystemTime(&time) == rcOk) {
+//        fprintf(stderr, "[%s] DEBUG Current time %f\n",
+//                ENTITY_NAME,
+//                time.sec * 1e3 + time.nsec / 1e6);
+    } else {
+        fprintf(stderr, "[%s] ERROR get time\n", ENTITY_NAME);
+    }
 
-    auto since_epoch = time.time_since_epoch(); // get the duration since epoch
-
-    return sc::duration_cast<sc::milliseconds>(since_epoch);
+    return time.sec * 1e3 + time.nsec / 1e6;
 }
 
 double getCurrentSpeed(DynamicPosition dynamicPosition) {
-    long deltaTime = (currentTime() - dynamicPosition.lastTimeUpdatePosition) / 1000.0;
+    long double deltaTime = (currentTime() - dynamicPosition.lastTimeUpdatePosition) / 1000.0;
     double distance = getDistance(dynamicPosition.currentPosition,
                                   dynamicPosition.lastPosition);
+//    fprintf(stderr, "[%s] SPEED distance: %f\n", ENTITY_NAME, distance);
 
     return distance / deltaTime;
 }

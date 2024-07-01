@@ -6,10 +6,10 @@
 #include <stdio.h>
 
 #define INACCURACY_CARGO 0.5 // Погрешность расстояния до сброса, м
-#define MAX_SPEED 5 // Максимальная скорость, м/c
+#define MAX_SPEED 8 // Максимальная скорость, м/c
 
-#define LOG_SPEED 1
-#define LOG_CARGO 1
+#define LOG_SPEED 0
+#define LOG_CARGO 0
 
 int validateSpeed(DynamicPosition position) {
     double currentSpeed = getCurrentSpeed(position);

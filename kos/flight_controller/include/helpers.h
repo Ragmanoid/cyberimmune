@@ -16,7 +16,7 @@ double getDistance(Position pos1, Position pos2);
 Position getCopterPosition(Position position);
 
 /// Текущее время в мс
-long currentTime();
+long double currentTime();
 
 /// Текущая скорость в м/с
 double getCurrentSpeed(DynamicPosition dynamicPosition);

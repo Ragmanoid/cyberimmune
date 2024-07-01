@@ -151,7 +151,7 @@ int main(void) {
     copter.currentPosition = getCopterPosition(copter.currentPosition);
 
     copter.lastPosition = copter.lastPosition;
-    long dynamicLastUpdate = currentTime();
+    long double dynamicLastUpdate = currentTime();
     Position cargoPosition = getCargoPosition();
 
     while (true) {
@@ -160,12 +160,10 @@ int main(void) {
         validateCargo(copter.currentPosition, cargoPosition);
         validateSpeed(copter);
 
-        fprintf(stderr, "[%s] DEBUG: CURRENT TIME %.3f\n",
-                ENTITY_NAME, currentTime());
-
         if (currentTime() - dynamicLastUpdate > SPEED_SCAN_RATE_MS) {
             copter.lastPosition = copter.currentPosition;
             copter.lastTimeUpdatePosition = currentTime();
+            dynamicLastUpdate = copter.lastTimeUpdatePosition;
         }
     }
 
