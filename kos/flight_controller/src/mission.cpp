@@ -8,10 +8,16 @@
 #define COMMAND_MAX_STRING_LEN 32
 
 uint32_t commandNum = 0;
+uint32_t posCount = 0;
+
 MissionCommand *commands = NULL;
+Position *positions = NULL;
+
 int hasMission = false;
 
 Position cargoPosition = {0, 0, 0};
+
+void saveMissionsToPositions();
 
 int isStopSymbol(char character) {
     return ((character == '_') || (character == '&') || (character == '#'));
@@ -35,7 +41,8 @@ void calcCargoWaypoint(int currentI) {
 
         if (cmd.type == CommandType::HOME) {
             cargoPosition.altitude += cmd.content.waypoint.altitude;
-            fprintf(stderr, "[%s] Info: Cargo position lat: %d lon: %d alt: %d\n", ENTITY_NAME, cargoPosition.latitude, cargoPosition.longitude, cargoPosition.altitude);
+            fprintf(stderr, "[%s] Info: Cargo position lat: %d lon: %d alt: %d\n", ENTITY_NAME, cargoPosition.latitude,
+                    cargoPosition.longitude, cargoPosition.altitude);
             break;
         }
     }
@@ -99,6 +106,7 @@ int parseCommands(char *str) {
     }
 
     commands = (MissionCommand *) malloc(commandNum * sizeof(MissionCommand));
+
     uint32_t ptr = 0;
     for (uint32_t i = 0; i < commandNum; i++) {
         uint32_t end = ptr;
@@ -116,6 +124,7 @@ int parseCommands(char *str) {
                     free(commands);
                     return 0;
                 }
+                posCount++;
                 commands[i].type = CommandType::HOME;
                 commands[i].content.waypoint = CommandWaypoint(lat, lng, alt);
                 break;
@@ -125,6 +134,7 @@ int parseCommands(char *str) {
                     free(commands);
                     return 0;
                 }
+                posCount++;
                 commands[i].type = CommandType::TAKEOFF;
                 commands[i].content.takeoff = CommandTakeoff(alt);
                 break;
@@ -136,6 +146,7 @@ int parseCommands(char *str) {
                     free(commands);
                     return 0;
                 }
+                posCount++;
                 commands[i].type = CommandType::WAYPOINT;
                 commands[i].content.waypoint = CommandWaypoint(lat, lng, alt);
                 break;
@@ -168,6 +179,9 @@ int parseCommands(char *str) {
         }
         ptr = end + 1;
     }
+
+    positions = (Position *) malloc(posCount * sizeof(Position));
+    saveMissionsToPositions();
 
     hasMission = 1;
     return 1;
@@ -227,6 +241,53 @@ void printMissions() {
         printMission(commands[i]);
 }
 
+void saveMissionsToPositions() {
+    fprintf(stderr, "[%s] Info: Normalized positions %d: \n", ENTITY_NAME, posCount);
+
+    Position lastHomePosition = {0, 0, 0};
+    int currentPos = 0;
+
+    for (int i = 0; i < commandNum; ++i) {
+        MissionCommand cmd = commands[i];
+
+        if (cmd.type != CommandType::HOME && cmd.type != CommandType::TAKEOFF && cmd.type != CommandType::WAYPOINT)
+            continue;
+
+        switch (cmd.type) {
+            case CommandType::HOME:
+                lastHomePosition = {
+                        cmd.content.waypoint.latitude,
+                        cmd.content.waypoint.longitude,
+                        cmd.content.waypoint.altitude
+                };
+                positions[currentPos] = lastHomePosition;
+                break;
+            case CommandType::TAKEOFF:
+                positions[currentPos] = {
+                        positions[currentPos - 1].latitude,
+                        positions[currentPos - 1].longitude,
+                        lastHomePosition.altitude + cmd.content.takeoff.altitude,
+                };
+                break;
+            case CommandType::WAYPOINT:
+                positions[currentPos] = {
+                        cmd.content.waypoint.latitude,
+                        cmd.content.waypoint.longitude,
+                        lastHomePosition.altitude + cmd.content.waypoint.altitude,
+                };
+                break;
+        }
+
+        printPosition(positions[currentPos]);
+        currentPos++;
+    }
+}
+
+
 Position getCargoPosition() {
     return cargoPosition;
+}
+
+Position* getPositions() {
+    return positions;
 }

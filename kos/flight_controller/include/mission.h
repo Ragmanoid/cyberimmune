@@ -66,3 +66,5 @@ struct Position {
 };
 
 Position getCargoPosition();
+
+Position *getPositions();

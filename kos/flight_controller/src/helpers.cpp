@@ -90,3 +90,11 @@ double getCurrentSpeed(DynamicPosition dynamicPosition) {
 
     return distance / deltaTime;
 }
+
+void printPosition(Position position) {
+    fprintf(stderr, "[%s] Info Position:\n\tLatitude: %.5f\n\tLongitude: %.5f \n\tAltitude: %.5f\n",
+            ENTITY_NAME,
+            position.latitude / 1e7,
+            position.longitude / 1e7,
+            position.altitude / 1e2);
+}

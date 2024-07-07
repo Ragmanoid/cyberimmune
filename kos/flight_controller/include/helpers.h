@@ -20,3 +20,5 @@ long double currentTime();
 
 /// Текущая скорость в м/с
 double getCurrentSpeed(DynamicPosition dynamicPosition);
+
+void printPosition(Position position);
