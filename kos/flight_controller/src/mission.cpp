@@ -267,6 +267,7 @@ void saveMissionsToPositions() {
                         positions[currentPos - 1].latitude,
                         positions[currentPos - 1].longitude,
                         lastHomePosition.altitude + cmd.content.takeoff.altitude,
+                        lastHomePosition.altitude
                 };
                 break;
             case CommandType::WAYPOINT:
@@ -274,6 +275,7 @@ void saveMissionsToPositions() {
                         cmd.content.waypoint.latitude,
                         cmd.content.waypoint.longitude,
                         lastHomePosition.altitude + cmd.content.waypoint.altitude,
+                        lastHomePosition.altitude
                 };
                 break;
         }
@@ -288,6 +290,6 @@ Position getCargoPosition() {
     return cargoPosition;
 }
 
-Position* getPositions() {
+Position *getPositions() {
     return positions;
 }

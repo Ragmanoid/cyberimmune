@@ -12,6 +12,10 @@
 
 #define LOG_POSITION 0
 
+long double currentTime();
+
+long double lastUpdateTime = currentTime();
+
 double toRadiansAngle(int coord) {
     return coord * 1e-7 * M_PI / 180;
 }
@@ -45,6 +49,9 @@ double getDistance(Position pos1, Position pos2) {
 
 // review: lapin.m
 Position getCopterPosition(Position position) {
+    if (currentTime() - lastUpdateTime < 1000)
+        return position;
+
     int latitude, longitude, altitude;
 
     if (!getCoords(latitude, longitude, altitude)) {
@@ -97,4 +104,41 @@ void printPosition(Position position) {
             position.latitude / 1e7,
             position.longitude / 1e7,
             position.altitude / 1e2);
+}
+
+double getDistance(Position p1, Position p2, Position point) {
+    double x1 = toRadiansAngle(p1.latitude);
+    double y1 = toRadiansAngle(p1.longitude);
+    double z1 = toMetersAltitude(p1.altitude);
+
+    double x2 = toRadiansAngle(p2.latitude);
+    double y2 = toRadiansAngle(p2.longitude);
+    double z2 = toMetersAltitude(p2.altitude);
+
+    double dx = getDistance(x2, abs(x2 - x1), y2, 0);
+    double dy = getDistance(x2, 0, y2, y2 - y1);
+    double d = getDistance(x2, abs(x2 - x1), y2, abs(y2 - y1));
+    double dz = abs(z2 - z1);
+
+    double xc = toRadiansAngle(point.latitude);
+    double yc = toRadiansAngle(point.longitude);
+    double zc = toMetersAltitude(point.latitude);
+
+    double dxc = getDistance(xc, abs(xc - x1), yc, 0);
+    double dyc = getDistance(xc, 0, yc, abs(yc - y1));
+    double dzc = abs(zc - z1);
+
+    double t = (dxc * dx + dyc * dy + dzc * dz) / (dx * dx + dy * dy + dz * dz);
+
+    if (t > 1)
+        t = 1;
+    else if (t < 0)
+        t = 0;
+
+    double distance = sqrt(
+            pow(-dxc + dx * t, 2) +
+            pow(-dyc + dy * t, 2) +
+            pow(-dzc + dz * t, 2));
+
+    return distance;
 }

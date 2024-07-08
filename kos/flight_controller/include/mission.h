@@ -60,11 +60,19 @@ struct Position {
     int latitude;
     int longitude;
     int altitude;
+    int homeAltitude;
 
     Position(int lat, int lng, int alt): latitude(lat), longitude(lng), altitude(alt) {
+    }
+
+    Position(int lat, int lng, int alt, int homeAlt): latitude(lat), longitude(lng), altitude(alt), homeAltitude(homeAlt) {
     }
 };
 
 Position getCargoPosition();
 
 Position *getPositions();
+
+
+MissionCommand* getCommands();
+uint32_t getNumCommands();
