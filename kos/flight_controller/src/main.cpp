@@ -18,7 +18,14 @@
 #define RETRY_DELAY_SEC 1
 #define RETRY_REQUEST_DELAY_SEC 5
 #define FLY_ACCEPT_PERIOD_US 500000
-#define SPEED_SCAN_RATE_MS 1000
+#define SPEED_SCAN_RATE_MS 300
+#define PAUSE_MISSION_CHECK_RATE_MS 300
+#define MAX_WAYPOINT_DIST 2
+
+
+long double checkPauseLastTime = currentTime();
+bool missionIsPaused = false;
+bool needPauseMission();
 
 int sendSignedMessage(char *method, char *response, char *errorMessage, uint8_t delay) {
     char message[512] = {0};
@@ -46,6 +53,27 @@ int sendSignedMessage(char *method, char *response, char *errorMessage, uint8_t 
                 ENTITY_NAME, errorMessage, delay);
         sleep(delay);
     }
+
+    return 1;
+}
+
+int sendFastSignedMessage(char *method, char *response) {
+    char message[512] = {0};
+    char signature[257] = {0};
+    char request[1024] = {0};
+    snprintf(message, 512, "%s?%s", method, BOARD_ID);
+
+    if (!signMessage(message, signature)) {
+        return 0;
+    }
+    snprintf(request, 1024, "%s&sig=0x%s", message, signature);
+
+    if (!sendRequest(request, response))
+        return 0;
+
+    uint8_t authenticity = 0;
+    if (!checkSignature(response, authenticity) || !authenticity)
+        return 0;
 
     return 1;
 }
@@ -154,12 +182,52 @@ int main(void) {
     long double dynamicLastUpdate = currentTime();
     Position cargoPosition = getCargoPosition();
 
+    int waypointCount = getWaypointCount();
+    Position *absolutePositions;
+    absolutePositions = getPositions();
+    int nextWaypointIdx = 1;
+    double dist;
+
+    fprintf(stderr, "[%s] DEBUG: Waypoints count : %d\n",
+                ENTITY_NAME,
+                waypointCount);
+
     while (true) {
-        copter.currentPosition = getCopterPosition(copter.currentPosition);
+        if (currentTime() - checkPauseLastTime > PAUSE_MISSION_CHECK_RATE_MS) {
+            if (needPauseMission()) {
+                if (!missionIsPaused) {
+                    while(!pauseFlight())
+                        sleep(1);
+                    fprintf(stderr, "[%s] Info Mission is paused\n", ENTITY_NAME);
+                }
+
+                missionIsPaused = true;
+                continue;
+            } else if (missionIsPaused) {
+                while(!resumeFlight())
+                    sleep(1);
+                fprintf(stderr, "[%s] Info Mission resumed\n", ENTITY_NAME);
+                missionIsPaused = false;
+            }
+        }
+
+        if (missionIsPaused)
+            continue;
+
+        //copter.currentPosition = getCopterPosition(copter.currentPosition);
 
         validateCargo(copter, cargoPosition);
-        validateSpeed(copter);
+        // validateSpeed(copter);
 
+        // double dist = getDistance(copter.currentPosition, absolutePositions[nextWaypointIdx]);
+        // if (dist < MAX_WAYPOINT_DIST && nextWaypointIdx < waypointCount) {
+        //         nextWaypointIdx++;
+        //         fprintf(stderr, "[%s] DEBUG: Next point is reached : %d\n",
+        //         ENTITY_NAME,
+        //         nextWaypointIdx);
+        //     }
+
+        // validatePosition(copter.currentPosition, absolutePositions[nextWaypointIdx - 1], absolutePositions[nextWaypointIdx]);
         if (currentTime() - dynamicLastUpdate > SPEED_SCAN_RATE_MS) {
             copter.lastPosition = copter.currentPosition;
             copter.lastTimeUpdatePosition = currentTime();
@@ -168,4 +236,28 @@ int main(void) {
     }
 
     return EXIT_SUCCESS;
+}
+
+bool needPauseMission() {
+    // Arm: 1 - disarm
+    // Arm: 0 - arm
+
+    char armRespone[1024] = {0};
+    if (missionIsPaused) {
+        sendSignedMessage("/api/fly_accept", armRespone, "fly_accept", RETRY_DELAY_SEC); 
+    } else if (!sendFastSignedMessage("/api/fly_accept", armRespone)) { 
+        checkPauseLastTime = currentTime();
+        return 0;
+    }
+
+    checkPauseLastTime = currentTime();
+
+    if (strstr(armRespone, "$Arm: 0#") != NULL) {
+        return 0;
+    } else if (strstr(armRespone, "$Arm: 1#") != NULL) {
+        return 1;
+    }
+
+    fprintf(stderr, "[%s] Error: needPauseMission - unknowrn response\n", ENTITY_NAME);
+    return 0;
 }

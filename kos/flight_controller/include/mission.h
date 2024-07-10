@@ -76,3 +76,4 @@ Position *getPositions();
 
 MissionCommand* getCommands();
 uint32_t getNumCommands();
+uint32_t getWaypointCount();

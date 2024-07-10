@@ -4,7 +4,6 @@
 #include <coresrv/time/time_api.h>
 #include <rtl/rtc.h>
 #include <math.h>
-#include <chrono>
 #include <stdio.h>
 
 #define R_EARTH 6371009
@@ -115,18 +114,18 @@ double getDistance(Position p1, Position p2, Position point) {
     double y2 = toRadiansAngle(p2.longitude);
     double z2 = toMetersAltitude(p2.altitude);
 
-    double dx = getDistance(x2, abs(x2 - x1), y2, 0);
+    double dx = getDistance(x2, fabs(x2 - x1), y2, 0);
     double dy = getDistance(x2, 0, y2, y2 - y1);
-    double d = getDistance(x2, abs(x2 - x1), y2, abs(y2 - y1));
-    double dz = abs(z2 - z1);
+    double d = getDistance(x2, fabs(x2 - x1), y2, fabs(y2 - y1));
+    double dz = fabs(z2 - z1);
 
     double xc = toRadiansAngle(point.latitude);
     double yc = toRadiansAngle(point.longitude);
-    double zc = toMetersAltitude(point.latitude);
+    double zc = toMetersAltitude(point.altitude);
 
-    double dxc = getDistance(xc, abs(xc - x1), yc, 0);
-    double dyc = getDistance(xc, 0, yc, abs(yc - y1));
-    double dzc = abs(zc - z1);
+    double dxc = getDistance(xc, fabs(xc - x1), yc, 0);
+    double dyc = getDistance(xc, 0, yc, fabs(yc - y1));
+    double dzc = fabs(zc - z1);
 
     double t = (dxc * dx + dyc * dy + dzc * dz) / (dx * dx + dy * dy + dz * dz);
 

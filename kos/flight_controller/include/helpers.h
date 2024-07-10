@@ -22,3 +22,4 @@ long double currentTime();
 double getCurrentSpeed(DynamicPosition dynamicPosition);
 
 void printPosition(Position position);
+double getDistance(Position p1, Position p2, Position point);

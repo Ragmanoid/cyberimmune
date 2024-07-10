@@ -9,6 +9,7 @@
 
 uint32_t commandNum = 0;
 uint32_t posCount = 0;
+uint32_t waypointCount = 0;
 
 MissionCommand *commands = NULL;
 Position *positions = NULL;
@@ -283,6 +284,7 @@ void saveMissionsToPositions() {
         printPosition(positions[currentPos]);
         currentPos++;
     }
+    waypointCount = currentPos;
 }
 
 
@@ -292,4 +294,8 @@ Position getCargoPosition() {
 
 Position *getPositions() {
     return positions;
+}
+
+uint32_t getWaypointCount() {
+    return waypointCount;
 }
