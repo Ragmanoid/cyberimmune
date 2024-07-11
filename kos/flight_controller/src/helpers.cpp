@@ -80,11 +80,7 @@ Position getCopterPosition(Position position) {
 long double currentTime() {
     RtlTimeSpec time;
 
-    if (KnGetSystemTime(&time) == rcOk) {
-//        fprintf(stderr, "[%s] DEBUG Current time %f\n",
-//                ENTITY_NAME,
-//                time.sec * 1e3 + time.nsec / 1e6);
-    } else {
+    if (KnGetSystemTime(&time) != rcOk) {
         fprintf(stderr, "[%s] ERROR get time\n", ENTITY_NAME);
     }
 
@@ -142,4 +138,30 @@ double getDistance(Position p1, Position p2, Position point) {
             pow(-dzc + dz * t, 2));
 
     return distance;
+}
+
+long double checkPauseLastTime = currentTime();
+
+bool needPauseMission(bool missionIsPaused) {
+    // Arm: 1 - disarm
+    // Arm: 0 - arm
+
+    char armRespone[1024] = {0};
+    if (missionIsPaused) {
+        sendSignedMessage("/api/fly_accept", armRespone, "fly_accept", RETRY_DELAY_SEC);
+    } else if (!sendFastSignedMessage("/api/fly_accept", armRespone)) {
+        checkPauseLastTime = currentTime();
+        return 0;
+    }
+
+    checkPauseLastTime = currentTime();
+
+    if (strstr(armRespone, "$Arm: 0#") != NULL) {
+        return 0;
+    } else if (strstr(armRespone, "$Arm: 1#") != NULL) {
+        return 1;
+    }
+
+    fprintf(stderr, "[%s] Error: needPauseMission - unknowrn response\n", ENTITY_NAME);
+    return 0;
 }

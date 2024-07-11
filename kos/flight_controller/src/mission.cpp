@@ -18,8 +18,6 @@ int hasMission = false;
 
 Position cargoPosition = {0, 0, 0};
 
-
-
 int isStopSymbol(char character) {
     return ((character == '_') || (character == '&') || (character == '#'));
 }
@@ -32,21 +30,20 @@ void calcCargoWaypoint(int currentI) {
         MissionCommand cmd = commands[currentI];
 
         if (cmd.type == CommandType::WAYPOINT) {
-            if (!hasBaseCoords) {
-                cargoPosition.latitude = cmd.content.waypoint.latitude;
-                cargoPosition.longitude = cmd.content.waypoint.longitude;
-                cargoPosition.altitude = cmd.content.waypoint.altitude;
-                hasBaseCoords = true;
-            }
-        }
-
-        if (cmd.type == CommandType::HOME) {
-            cargoPosition.altitude += cmd.content.waypoint.altitude;
-            fprintf(stderr, "[%s] Info: Cargo position lat: %d lon: %d alt: %d\n", ENTITY_NAME, cargoPosition.latitude,
-                    cargoPosition.longitude, cargoPosition.altitude);
-            break;
+            cargoPosition.latitude = cmd.content.waypoint.latitude;
+            cargoPosition.longitude = cmd.content.waypoint.longitude;
+            cargoPosition.altitude = cmd.content.waypoint.altitude;
+            fprintf(stderr, "[%s] Info: Cargo position lat: %d lon: %d alt: %d\n", ENTITY_NAME,
+                    cargoPosition.latitude,
+                    cargoPosition.longitude,
+                    cargoPosition.altitude);
+            return;
         }
     }
+}
+
+void addHomeAltitudeToCargo(int32_t homeAltitude) {
+    cargoPosition.altitude += homeAltitude;
 }
 
 int parseInt(char *&string, int32_t &value, uint32_t numAfterPoint) {

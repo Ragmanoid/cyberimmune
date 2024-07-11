@@ -2,11 +2,14 @@
 
 #pragma once
 
+/// Валидатор скорости
 int validateSpeed(DynamicPosition position);
 
-int validatePosition();
-
+/// Валидатор сброса груза
 int validateCargo(DynamicPosition position, Position cargoPosition);
 
+/// Валидатор позиции
 int validatePosition(Position dronePosition, Position prevWaypoint, Position nextWaypoint);
+
+/// Валидатор высоты
 int validateAltitude(Position dronePosition, Position nextWaypoint);

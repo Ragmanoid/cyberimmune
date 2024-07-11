@@ -2,6 +2,11 @@
 
 #include <stdint.h>
 
+/// HOME - Точка дома;
+/// TAKEOFF - Взлёт;
+/// WAYPOINT - Точка полёта;
+/// LAND - Посадка;
+/// SET_SERVO - Активировать сервопривод;
 enum CommandType {
     HOME,
     TAKEOFF,
@@ -10,6 +15,7 @@ enum CommandType {
     SET_SERVO
 };
 
+/// DTO - взлёта
 struct CommandTakeoff {
     int32_t altitude;
 
@@ -18,6 +24,7 @@ struct CommandTakeoff {
     }
 };
 
+/// DTO - точки полёта
 struct CommandWaypoint {
     int32_t latitude;
     int32_t longitude;
@@ -31,6 +38,7 @@ struct CommandWaypoint {
 };
 
 
+/// DTO - активации сервопривода
 struct CommandServo {
     int32_t number;
     int32_t pwm;
@@ -41,21 +49,20 @@ struct CommandServo {
     }
 };
 
+/// DTO - данных миссии
 union CommandContent {
     CommandTakeoff takeoff;
     CommandWaypoint waypoint;
     CommandServo servo;
 };
 
+/// DTO - данных миссии с типом миссии
 struct MissionCommand {
     CommandType type;
     CommandContent content;
 };
 
-int parseMission(char *response);
-
-void printMissions();
-
+/// DTO - позиции
 struct Position {
     int latitude;
     int longitude;
@@ -69,13 +76,29 @@ struct Position {
     }
 };
 
+/// Парсиинг миссии
+int parseMission(char *response);
+
+/// Логгирование миссии
+void printMissions();
+
+/// Добавить к координатам точки сброса груза, координату позиции дома
+void addHomeAltitudeToCargo(int32_t homeAltitude);
+
+/// Получить позицию сброса груза
 Position getCargoPosition();
 
+/// Получить список всех позиций
 Position *getPositions();
 
+/// Сохранить миссию в позиции
 void saveMissionsToPositions(int homeAltitude);
 
-
+/// Получить список команд в миссии
 MissionCommand* getCommands();
+
+/// Получить число команд в миссии
 uint32_t getNumCommands();
+
+/// Получить число позиций в миссии
 uint32_t getWaypointCount();

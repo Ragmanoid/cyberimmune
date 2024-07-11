@@ -1,6 +1,7 @@
 #include "../include/mission.h"
 #include "../include/validations.h"
 #include "../include/helpers.h"
+#include "../include/signedMessages.h"
 #include "../../shared/include/initialization_interface.h"
 #include "../../shared/include/ipc_messages_initialization.h"
 #include "../../shared/include/ipc_messages_autopilot_connector.h"
@@ -18,65 +19,10 @@
 #define RETRY_DELAY_SEC 1
 #define RETRY_REQUEST_DELAY_SEC 5
 #define FLY_ACCEPT_PERIOD_US 500000
-#define SPEED_SCAN_RATE_MS 900
-#define PAUSE_MISSION_CHECK_RATE_MS 300
-#define MAX_WAYPOINT_DIST 1.5
 
-
-long double checkPauseLastTime = currentTime();
-bool missionIsPaused = false;
-bool needPauseMission();
-
-int sendSignedMessage(char *method, char *response, char *errorMessage, uint8_t delay) {
-    char message[512] = {0};
-    char signature[257] = {0};
-    char request[1024] = {0};
-    snprintf(message, 512, "%s?%s", method, BOARD_ID);
-
-    while (!signMessage(message, signature)) {
-        fprintf(stderr, "[%s] Warning: Failed to sign %s message at Credential Manager. Trying again in %ds\n",
-                ENTITY_NAME, errorMessage, delay);
-        sleep(delay);
-    }
-    snprintf(request, 1024, "%s&sig=0x%s", message, signature);
-
-    while (!sendRequest(request, response)) {
-        fprintf(stderr, "[%s] Warning: Failed to send %s request through Server Connector. Trying again in %ds\n",
-                ENTITY_NAME, errorMessage, delay);
-        sleep(delay);
-    }
-
-    uint8_t authenticity = 0;
-    while (!checkSignature(response, authenticity) || !authenticity) {
-        fprintf(stderr,
-                "[%s] Warning: Failed to check signature of %s response received through Server Connector. Trying again in %ds\n",
-                ENTITY_NAME, errorMessage, delay);
-        sleep(delay);
-    }
-
-    return 1;
-}
-
-int sendFastSignedMessage(char *method, char *response) {
-    char message[512] = {0};
-    char signature[257] = {0};
-    char request[1024] = {0};
-    snprintf(message, 512, "%s?%s", method, BOARD_ID);
-
-    if (!signMessage(message, signature)) {
-        return 0;
-    }
-    snprintf(request, 1024, "%s&sig=0x%s", message, signature);
-
-    if (!sendRequest(request, response))
-        return 0;
-
-    uint8_t authenticity = 0;
-    if (!checkSignature(response, authenticity) || !authenticity)
-        return 0;
-
-    return 1;
-}
+#define SPEED_SCAN_RATE_MS 900 // Регулярность контроля скорости
+#define PAUSE_MISSION_CHECK_RATE_MS 300 // Регулярность опроса ОРВД о паузе миссии
+#define MAX_WAYPOINT_DIST 1.5 // Максимальное расстояние до точки, м
 
 int main(void) {
     //Before do anything, we need to ensure, that other modules are ready to work
@@ -116,7 +62,7 @@ int main(void) {
     if (!enableBuzzer())
         fprintf(stderr, "[%s] Warning: Failed to enable buzzer at Periphery Controller\n", ENTITY_NAME);
 
-    //Copter need to be registered at ORVD
+    // Регистрация дрона в ОРВД
     char authResponse[1024] = {0};
     sendSignedMessage("/api/auth", authResponse, "authentication", RETRY_DELAY_SEC);
     fprintf(stderr, "[%s] Info: Successfully authenticated on the server\n", ENTITY_NAME);
@@ -133,12 +79,10 @@ int main(void) {
         sleep(RETRY_REQUEST_DELAY_SEC);
     }
 
-   
-
-    //The drone is ready to arm
+    // The drone is ready to arm
     fprintf(stderr, "[%s] Info: Ready to arm\n", ENTITY_NAME);
     while (true) {
-        //Wait, until autopilot wants to arm (and fails so, as motors are disabled by default)
+        // Wait, until autopilot wants to arm (and fails so, as motors are disabled by default)
         while (!waitForArmRequest()) {
             fprintf(stderr,
                     "[%s] Warning: Failed to receive an arm request from Autopilot Connector. Trying again in %ds\n",
@@ -147,12 +91,12 @@ int main(void) {
         }
         fprintf(stderr, "[%s] Info: Received arm request. Notifying the server\n", ENTITY_NAME);
 
-        //When autopilot asked for arm, we need to receive permission from ORVD
+        // When autopilot asked for arm, we need to receive permission from ORVD
         char armRespone[1024] = {0};
         sendSignedMessage("/api/arm", armRespone, "arm", RETRY_DELAY_SEC);
 
         if (strstr(armRespone, "$Arm: 0#") != NULL) {
-            //If arm was permitted, we enable motors
+            // If arm was permitted, we enable motors
             fprintf(stderr, "[%s] Info: Arm is permitted\n", ENTITY_NAME);
             while (!setKillSwitch(true)) {
                 fprintf(stderr,
@@ -173,18 +117,19 @@ int main(void) {
                 ENTITY_NAME);
     }
 
-    
+    // If we get here, the drone is able to arm and start the mission
+    // The flight is need to be controlled from now on
+    // Also we need to check on ORVD, whether the flight is still allowed or it is need to be paused
 
-    //If we get here, the drone is able to arm and start the mission
-    //The flight is need to be controlled from now on
-    //Also we need to check on ORVD, whether the flight is still allowed or it is need to be paused
-
+    // Обработка базовых координат взлёта
     DynamicPosition copter = {{0, 0, 0}, {0, 0, 0}, 0};
     copter.currentPosition = getCopterPosition(copter.currentPosition);
-    int homeAltitude = copter.currentPosition.altitude;
+    int32_t homeAltitude = copter.currentPosition.altitude;
     saveMissionsToPositions(homeAltitude);
+    addHomeAltitudeToCargo(homeAltitude);
 
-    copter.lastPosition = copter.lastPosition;
+    // Получим первичные значения положения
+    bool missionIsPaused = false;
     long double dynamicLastUpdate = currentTime();
     Position cargoPosition = getCargoPosition();
 
@@ -216,6 +161,7 @@ int main(void) {
     changeSpeed(2);
 
     while (true) {
+        // Проверка на остановку миссии
         if (currentTime() - checkPauseLastTime > PAUSE_MISSION_CHECK_RATE_MS) {
             if (needPauseMission()) {
                 if (!missionIsPaused) {
@@ -239,9 +185,7 @@ int main(void) {
 
         copter.currentPosition = getCopterPosition(copter.currentPosition);
 
-        validateCargo(copter, cargoPosition);
-
-
+        // Определение точки, которую дрон достиг
         for (int wpIdx = nextWaypointIdx; wpIdx < waypointCount; ++wpIdx) {
             double dist = getDistance(copter.currentPosition, absolutePositions[wpIdx]);
             if (dist < MAX_WAYPOINT_DIST && wpIdx < waypointCount) {
@@ -252,44 +196,27 @@ int main(void) {
                     break;
                 }
         }
+
+        // Валидация позиции в ширину
         if(!validatePosition(copter.currentPosition, absolutePositions[nextWaypointIdx - 1], absolutePositions[nextWaypointIdx]))
             return EXIT_FAILURE;
 
+        // алидация позиции в высоту
         if (nextWaypointIdx > 3) 
             if(!validateAltitude(copter.currentPosition, absolutePositions[nextWaypointIdx]))
                 return EXIT_FAILURE;
 
+        // Валидация скорости
         if (currentTime() - dynamicLastUpdate > SPEED_SCAN_RATE_MS) {
             validateSpeed(copter);
             copter.lastPosition = copter.currentPosition;
             copter.lastTimeUpdatePosition = currentTime();
             dynamicLastUpdate = copter.lastTimeUpdatePosition;
         }
+
+        // Валидация сброса груза
+        validateCargo(copter, cargoPosition);
     }
 
     return EXIT_SUCCESS;
-}
-
-bool needPauseMission() {
-    // Arm: 1 - disarm
-    // Arm: 0 - arm
-
-    char armRespone[1024] = {0};
-    if (missionIsPaused) {
-        sendSignedMessage("/api/fly_accept", armRespone, "fly_accept", RETRY_DELAY_SEC); 
-    } else if (!sendFastSignedMessage("/api/fly_accept", armRespone)) { 
-        checkPauseLastTime = currentTime();
-        return 0;
-    }
-
-    checkPauseLastTime = currentTime();
-
-    if (strstr(armRespone, "$Arm: 0#") != NULL) {
-        return 0;
-    } else if (strstr(armRespone, "$Arm: 1#") != NULL) {
-        return 1;
-    }
-
-    fprintf(stderr, "[%s] Error: needPauseMission - unknowrn response\n", ENTITY_NAME);
-    return 0;
 }
