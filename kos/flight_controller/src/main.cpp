@@ -18,9 +18,9 @@
 #define RETRY_DELAY_SEC 1
 #define RETRY_REQUEST_DELAY_SEC 5
 #define FLY_ACCEPT_PERIOD_US 500000
-#define SPEED_SCAN_RATE_MS 300
+#define SPEED_SCAN_RATE_MS 900
 #define PAUSE_MISSION_CHECK_RATE_MS 300
-#define MAX_WAYPOINT_DIST 2
+#define MAX_WAYPOINT_DIST 1.5
 
 
 long double checkPauseLastTime = currentTime();
@@ -133,6 +133,8 @@ int main(void) {
         sleep(RETRY_REQUEST_DELAY_SEC);
     }
 
+   
+
     //The drone is ready to arm
     fprintf(stderr, "[%s] Info: Ready to arm\n", ENTITY_NAME);
     while (true) {
@@ -171,12 +173,16 @@ int main(void) {
                 ENTITY_NAME);
     }
 
+    
+
     //If we get here, the drone is able to arm and start the mission
     //The flight is need to be controlled from now on
     //Also we need to check on ORVD, whether the flight is still allowed or it is need to be paused
 
     DynamicPosition copter = {{0, 0, 0}, {0, 0, 0}, 0};
     copter.currentPosition = getCopterPosition(copter.currentPosition);
+    int homeAltitude = copter.currentPosition.altitude;
+    saveMissionsToPositions(homeAltitude);
 
     copter.lastPosition = copter.lastPosition;
     long double dynamicLastUpdate = currentTime();
@@ -191,6 +197,23 @@ int main(void) {
     fprintf(stderr, "[%s] DEBUG: Waypoints count : %d\n",
                 ENTITY_NAME,
                 waypointCount);
+
+    for (int k = 0; k < waypointCount; ++k)
+    {
+        fprintf(stderr, "[%s] Waypoint %d:\n\tLatitude: %.5f\n\tLongitude: %.5f \n\tAltitude: %.5f\n",
+                ENTITY_NAME, k,
+                absolutePositions[k].latitude / 1e7,
+                absolutePositions[k].longitude / 1e7,
+                absolutePositions[k].altitude / 1e2);
+    }
+
+    fprintf(stderr, "[%s] Copter position:\n\tLatitude: %.5f\n\tLongitude: %.5f \n\tAltitude: %.5f\n",
+                ENTITY_NAME,
+                copter.currentPosition.latitude / 1e7,
+                copter.currentPosition.longitude / 1e7,
+                copter.currentPosition.altitude / 1e2);
+
+    changeSpeed(2);
 
     while (true) {
         if (currentTime() - checkPauseLastTime > PAUSE_MISSION_CHECK_RATE_MS) {
@@ -214,21 +237,30 @@ int main(void) {
         if (missionIsPaused)
             continue;
 
-        //copter.currentPosition = getCopterPosition(copter.currentPosition);
+        copter.currentPosition = getCopterPosition(copter.currentPosition);
 
         validateCargo(copter, cargoPosition);
-        // validateSpeed(copter);
 
-        // double dist = getDistance(copter.currentPosition, absolutePositions[nextWaypointIdx]);
-        // if (dist < MAX_WAYPOINT_DIST && nextWaypointIdx < waypointCount) {
-        //         nextWaypointIdx++;
-        //         fprintf(stderr, "[%s] DEBUG: Next point is reached : %d\n",
-        //         ENTITY_NAME,
-        //         nextWaypointIdx);
-        //     }
 
-        // validatePosition(copter.currentPosition, absolutePositions[nextWaypointIdx - 1], absolutePositions[nextWaypointIdx]);
+        for (int wpIdx = nextWaypointIdx; wpIdx < waypointCount; ++wpIdx) {
+            double dist = getDistance(copter.currentPosition, absolutePositions[wpIdx]);
+            if (dist < MAX_WAYPOINT_DIST && wpIdx < waypointCount) {
+                    nextWaypointIdx = wpIdx + 1;
+                    fprintf(stderr, "[%s] DEBUG: Next point is reached : %d\n",
+                    ENTITY_NAME,
+                    wpIdx);
+                    break;
+                }
+        }
+        if(!validatePosition(copter.currentPosition, absolutePositions[nextWaypointIdx - 1], absolutePositions[nextWaypointIdx]))
+            return EXIT_FAILURE;
+
+        if (nextWaypointIdx > 3) 
+            if(!validateAltitude(copter.currentPosition, absolutePositions[nextWaypointIdx]))
+                return EXIT_FAILURE;
+
         if (currentTime() - dynamicLastUpdate > SPEED_SCAN_RATE_MS) {
+            validateSpeed(copter);
             copter.lastPosition = copter.currentPosition;
             copter.lastTimeUpdatePosition = currentTime();
             dynamicLastUpdate = copter.lastTimeUpdatePosition;

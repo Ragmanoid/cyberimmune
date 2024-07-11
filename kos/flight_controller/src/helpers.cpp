@@ -9,7 +9,7 @@
 #define R_EARTH 6371009
 #define M_PI 3.14159265358979323846
 
-#define LOG_POSITION 0
+#define LOG_POSITION 1
 
 long double currentTime();
 
@@ -48,7 +48,7 @@ double getDistance(Position pos1, Position pos2) {
 
 // review: lapin.m
 Position getCopterPosition(Position position) {
-    if (currentTime() - lastUpdateTime < 1000)
+    if (currentTime() - lastUpdateTime < 300)
         return position;
 
     int latitude, longitude, altitude;
@@ -57,6 +57,8 @@ Position getCopterPosition(Position position) {
         fprintf(stderr, "[%s] Warning: Failed to get coordinates\n", ENTITY_NAME);
         return position;
     }
+
+    lastUpdateTime = currentTime();
 
     position.latitude = latitude;
     position.longitude = longitude;

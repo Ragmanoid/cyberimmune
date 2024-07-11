@@ -18,7 +18,7 @@ int hasMission = false;
 
 Position cargoPosition = {0, 0, 0};
 
-void saveMissionsToPositions();
+
 
 int isStopSymbol(char character) {
     return ((character == '_') || (character == '&') || (character == '#'));
@@ -182,7 +182,7 @@ int parseCommands(char *str) {
     }
 
     positions = (Position *) malloc(posCount * sizeof(Position));
-    saveMissionsToPositions();
+    //saveMissionsToPositions();
 
     hasMission = 1;
     return 1;
@@ -242,7 +242,7 @@ void printMissions() {
         printMission(commands[i]);
 }
 
-void saveMissionsToPositions() {
+void saveMissionsToPositions(int homeAltitude) {
     fprintf(stderr, "[%s] Info: Normalized positions %d: \n", ENTITY_NAME, posCount);
 
     Position lastHomePosition = {0, 0, 0};
@@ -267,16 +267,16 @@ void saveMissionsToPositions() {
                 positions[currentPos] = {
                         positions[currentPos - 1].latitude,
                         positions[currentPos - 1].longitude,
-                        lastHomePosition.altitude + cmd.content.takeoff.altitude,
-                        lastHomePosition.altitude
+                        homeAltitude + cmd.content.takeoff.altitude,
+                        cmd.content.takeoff.altitude
                 };
                 break;
             case CommandType::WAYPOINT:
                 positions[currentPos] = {
                         cmd.content.waypoint.latitude,
                         cmd.content.waypoint.longitude,
-                        lastHomePosition.altitude + cmd.content.waypoint.altitude,
-                        lastHomePosition.altitude
+                        homeAltitude + cmd.content.waypoint.altitude,
+                        cmd.content.waypoint.altitude
                 };
                 break;
         }

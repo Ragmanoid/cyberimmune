@@ -73,6 +73,8 @@ Position getCargoPosition();
 
 Position *getPositions();
 
+void saveMissionsToPositions(int homeAltitude);
+
 
 MissionCommand* getCommands();
 uint32_t getNumCommands();
