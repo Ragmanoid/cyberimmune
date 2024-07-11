@@ -16,13 +16,14 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define RETRY_DELAY_SEC 1
 #define RETRY_REQUEST_DELAY_SEC 5
 #define FLY_ACCEPT_PERIOD_US 500000
 
 #define SPEED_SCAN_RATE_MS 900 // Регулярность контроля скорости
 #define PAUSE_MISSION_CHECK_RATE_MS 300 // Регулярность опроса ОРВД о паузе миссии
 #define MAX_WAYPOINT_DIST 1.5 // Максимальное расстояние до точки, м
+
+extern long double checkPauseLastTime;
 
 int main(void) {
     //Before do anything, we need to ensure, that other modules are ready to work
@@ -163,7 +164,7 @@ int main(void) {
     while (true) {
         // Проверка на остановку миссии
         if (currentTime() - checkPauseLastTime > PAUSE_MISSION_CHECK_RATE_MS) {
-            if (needPauseMission()) {
+            if (needPauseMission(missionIsPaused)) {
                 if (!missionIsPaused) {
                     while(!pauseFlight())
                         sleep(1);
@@ -197,14 +198,15 @@ int main(void) {
                 }
         }
 
-        // Валидация позиции в ширину
-        if(!validatePosition(copter.currentPosition, absolutePositions[nextWaypointIdx - 1], absolutePositions[nextWaypointIdx]))
-            return EXIT_FAILURE;
-
         // алидация позиции в высоту
         if (nextWaypointIdx > 3) 
             if(!validateAltitude(copter.currentPosition, absolutePositions[nextWaypointIdx]))
                 return EXIT_FAILURE;
+
+        // Валидация позиции в ширину
+        if(!validatePosition(copter.currentPosition, absolutePositions[nextWaypointIdx - 1], absolutePositions[nextWaypointIdx]))
+            return EXIT_FAILURE;
+
 
         // Валидация скорости
         if (currentTime() - dynamicLastUpdate > SPEED_SCAN_RATE_MS) {

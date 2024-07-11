@@ -256,7 +256,7 @@ void saveMissionsToPositions(int homeAltitude) {
                 lastHomePosition = {
                         cmd.content.waypoint.latitude,
                         cmd.content.waypoint.longitude,
-                        cmd.content.waypoint.altitude
+                        homeAltitude
                 };
                 positions[currentPos] = lastHomePosition;
                 break;

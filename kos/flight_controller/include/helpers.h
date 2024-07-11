@@ -4,6 +4,12 @@
 
 #include <stdint.h>
 
+#define R_EARTH 6371009
+#define M_PI 3.14159265358979323846
+#define RETRY_DELAY_SEC 1
+
+#define LOG_POSITION 1
+
 struct DynamicPosition {
     Position currentPosition;
     Position lastPosition;
@@ -29,3 +35,7 @@ void printPosition(Position position);
 /// p1, p2 - координаты концов отрезка.
 /// point - точка до которой считается расстояние.
 double getDistance(Position p1, Position p2, Position point);
+
+/// Проверка разрешения на полет.
+/// тmissionIsPaused - екущее состояние полета
+bool needPauseMission(bool missionIsPaused);

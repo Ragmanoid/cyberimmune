@@ -1,19 +1,18 @@
 #include "../include/helpers.h"
+#include "../include/signedMessages.h"
 #include "../../shared/include/ipc_messages_navigation_system.h"
 
 #include <coresrv/time/time_api.h>
 #include <rtl/rtc.h>
 #include <math.h>
 #include <stdio.h>
+#include <string.h>
 
-#define R_EARTH 6371009
-#define M_PI 3.14159265358979323846
-
-#define LOG_POSITION 1
 
 long double currentTime();
 
 long double lastUpdateTime = currentTime();
+long double checkPauseLastTime = currentTime();
 
 double toRadiansAngle(int coord) {
     return coord * 1e-7 * M_PI / 180;
@@ -140,7 +139,6 @@ double getDistance(Position p1, Position p2, Position point) {
     return distance;
 }
 
-long double checkPauseLastTime = currentTime();
 
 bool needPauseMission(bool missionIsPaused) {
     // Arm: 1 - disarm

@@ -134,9 +134,9 @@ int validateAltitude(Position dronePosition, Position nextWaypoint)
         }
         return 1;
     }
-    else if (abs(dronePosition.altitude - nextWaypoint.altitude) > MAX_ALT_KILL_SWITCH)
+    else if ((dronePosition.altitude - nextWaypoint.altitude) > MAX_ALT_KILL_SWITCH)
     {
-        // setKillSwitch(0);
+        setKillSwitch(0);
         fprintf(stderr, "[%s] DEBUG: Drone altitude = %d, wp altitude = %d, dif = %d\n",
                             ENTITY_NAME,
                             dronePosition.altitude,
@@ -144,7 +144,7 @@ int validateAltitude(Position dronePosition, Position nextWaypoint)
                             abs(dronePosition.altitude - nextWaypoint.altitude));
         fprintf(stderr, "[%s] DEBUG: KILL SWITCH ALTITUDE\n",
                 ENTITY_NAME);
-        // return 0;
+        return 0;
     }
     return 1;
 }

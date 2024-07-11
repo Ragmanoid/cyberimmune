@@ -1,6 +1,19 @@
 #include "../include/signedMessages.h"
 
-int sendSignedMessage(char *method, char *response, char *errorMessage, uint8_t delay) {
+#include "../../shared/include/initialization_interface.h"
+#include "../../shared/include/ipc_messages_initialization.h"
+#include "../../shared/include/ipc_messages_autopilot_connector.h"
+#include "../../shared/include/ipc_messages_credential_manager.h"
+#include "../../shared/include/ipc_messages_navigation_system.h"
+#include "../../shared/include/ipc_messages_periphery_controller.h"
+#include "../../shared/include/ipc_messages_server_connector.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+
+int sendSignedMessage(char *method, char *response, char *errorMessage, unsigned char delay) {
     char message[512] = {0};
     char signature[257] = {0};
     char request[1024] = {0};
