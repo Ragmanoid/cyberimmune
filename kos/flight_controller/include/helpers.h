@@ -8,7 +8,7 @@
 #define M_PI 3.14159265358979323846
 #define RETRY_DELAY_SEC 1
 
-#define LOG_POSITION 1
+#define LOG_POSITION 0
 
 struct DynamicPosition {
     Position currentPosition;

@@ -21,7 +21,7 @@
 
 #define SPEED_SCAN_RATE_MS 900 // Регулярность контроля скорости
 #define PAUSE_MISSION_CHECK_RATE_MS 300 // Регулярность опроса ОРВД о паузе миссии
-#define MAX_WAYPOINT_DIST 1.5 // Максимальное расстояние до точки, м
+#define MAX_WAYPOINT_DIST 5 // Максимальное расстояние до точки, м
 
 extern long double checkPauseLastTime;
 
@@ -139,27 +139,11 @@ int main(void) {
     absolutePositions = getPositions();
     int nextWaypointIdx = 1;
     double dist;
+    bool speedIsSetted = false;
 
     fprintf(stderr, "[%s] DEBUG: Waypoints count : %d\n",
                 ENTITY_NAME,
                 waypointCount);
-
-    for (int k = 0; k < waypointCount; ++k)
-    {
-        fprintf(stderr, "[%s] Waypoint %d:\n\tLatitude: %.5f\n\tLongitude: %.5f \n\tAltitude: %.5f\n",
-                ENTITY_NAME, k,
-                absolutePositions[k].latitude / 1e7,
-                absolutePositions[k].longitude / 1e7,
-                absolutePositions[k].altitude / 1e2);
-    }
-
-    fprintf(stderr, "[%s] Copter position:\n\tLatitude: %.5f\n\tLongitude: %.5f \n\tAltitude: %.5f\n",
-                ENTITY_NAME,
-                copter.currentPosition.latitude / 1e7,
-                copter.currentPosition.longitude / 1e7,
-                copter.currentPosition.altitude / 1e2);
-
-    changeSpeed(2);
 
     while (true) {
         // Проверка на остановку миссии
@@ -169,6 +153,7 @@ int main(void) {
                     while(!pauseFlight())
                         sleep(1);
                     fprintf(stderr, "[%s] Info Mission is paused\n", ENTITY_NAME);
+                    sendLogs("Mission_paused");
                 }
 
                 missionIsPaused = true;
@@ -177,6 +162,7 @@ int main(void) {
                 while(!resumeFlight())
                     sleep(1);
                 fprintf(stderr, "[%s] Info Mission resumed\n", ENTITY_NAME);
+                sendLogs("Mission_resumed");
                 missionIsPaused = false;
             }
         }
@@ -187,18 +173,24 @@ int main(void) {
         copter.currentPosition = getCopterPosition(copter.currentPosition);
 
         // Определение точки, которую дрон достиг
-        for (int wpIdx = nextWaypointIdx; wpIdx < waypointCount; ++wpIdx) {
+        for (int wpIdx = nextWaypointIdx; wpIdx < waypointCount - 1; ++wpIdx) {
             double dist = getDistance(copter.currentPosition, absolutePositions[wpIdx]);
             if (dist < MAX_WAYPOINT_DIST && wpIdx < waypointCount) {
                     nextWaypointIdx = wpIdx + 1;
-                    fprintf(stderr, "[%s] DEBUG: Next point is reached : %d\n",
-                    ENTITY_NAME,
-                    wpIdx);
+                    char msg[100] = {0}; 
+                    snprintf(msg, 100, "Next_point_is_reached:%d", wpIdx);
+                    fprintf(stderr, "[%s] DEBUG: %s\n", ENTITY_NAME, msg);
+                    sendLogs(msg);
                     break;
                 }
         }
 
-        // алидация позиции в высоту
+        if (nextWaypointIdx > 2 && !speedIsSetted) {
+            if (changeSpeed(2))
+                speedIsSetted = true;
+        }
+
+        // Валидация позиции в высоту
         if (nextWaypointIdx > 3) 
             if(!validateAltitude(copter.currentPosition, absolutePositions[nextWaypointIdx]))
                 return EXIT_FAILURE;

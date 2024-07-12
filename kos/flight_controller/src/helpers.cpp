@@ -164,7 +164,9 @@ bool needPauseMission(bool missionIsPaused) {
     return 0;
 }
 
-void sendLogs(char *message) {
+void sendLogs(char *log) {
     char logResponse[1024] = {0};
-    sendSignedMessage("/api/logs", logResponse, "send_log", RETRY_DELAY_SEC);
+    char message[512] = {0};
+    snprintf(message, 512, "/api/logs?%s&log=%s", BOARD_ID, log);
+    sendSignedMessage(message, "send_log", RETRY_DELAY_SEC);
 }
