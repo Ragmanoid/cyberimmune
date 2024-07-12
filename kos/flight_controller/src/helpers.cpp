@@ -163,3 +163,8 @@ bool needPauseMission(bool missionIsPaused) {
     fprintf(stderr, "[%s] Error: needPauseMission - unknowrn response\n", ENTITY_NAME);
     return 0;
 }
+
+void sendLogs(char *message) {
+    char logResponse[1024] = {0};
+    sendSignedMessage("/api/logs", logResponse, "send_log", RETRY_DELAY_SEC);
+}

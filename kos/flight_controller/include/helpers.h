@@ -39,3 +39,6 @@ double getDistance(Position p1, Position p2, Position point);
 /// Проверка разрешения на полет.
 /// тmissionIsPaused - екущее состояние полета
 bool needPauseMission(bool missionIsPaused);
+
+/// Отправка логов
+bool sendLogs(char *message);
