@@ -24,6 +24,7 @@ bool lastCargoValue = true;
 long double lastAltitudeTime = currentTime();
 long double lastChangePositionTime = currentTime();
 long double lastSpeedLogTime = currentTime();
+int killSwitchIsPermitted = 0;
 
 int validateSpeed(DynamicPosition position) {
     double currentSpeed = getCurrentSpeed(position);
@@ -72,7 +73,10 @@ int validateCargo(DynamicPosition position, Position cargo) {
         if (setCargoLock(currentCargoValue)) {
             lastCargoValue = currentCargoValue;
             if (currentCargoValue)
+            {
                 sendLogs("Cargo_unlocked");
+                killSwitchIsPermitted = 1;
+            }
             else
                 sendLogs("Cargo_locked");
         }
@@ -169,7 +173,7 @@ int validateAltitude(Position dronePosition, Position nextWaypoint)
         else if ((dronePosition.altitude - nextWaypoint.altitude) > MAX_ALT_KILL_SWITCH)
         {
             error_count++;
-            if (error_count > 4)
+            if (killSwitchIsPermitted)
             {
                 setKillSwitch(0);
                 fprintf(stderr, "[%s] DEBUG: Drone altitude = %d, wp altitude = %d, dif = %d\n",
