@@ -24,6 +24,7 @@ bool lastCargoValue = true;
 long double lastAltitudeTime = currentTime();
 long double lastChangePositionTime = currentTime();
 long double lastSpeedLogTime = currentTime();
+long double lastDirectionTime = currentTime();
 int killSwitchIsPermitted = 0;
 
 int validateSpeed(DynamicPosition position) {
@@ -190,4 +191,38 @@ int validateAltitude(Position dronePosition, Position nextWaypoint)
         else error_count = 0;
     }
     return 1;
+}
+
+int validateDirection(DynamicPosition copter)
+{
+    static int error_count = 0;
+    static double prev_dist = 1e9;
+    double dist;
+    if (currentTime() - lastDirectionTime > 700)
+    {
+        lastDirectionTime = currentTime();
+        dist = getDistance(copter.lastPosition, copter.currentPosition);
+        if (dist > prev_dist)
+            error_count++;
+        else 
+            error_count = 0;
+        if (error_count > 3 && killSwitchIsPermitted)
+        {
+            setKillSwitch(0);
+            if (LOG_POS) {
+                char msg[100] = {0}; 
+                snprintf(msg, 100, "Kill_switch_direction:%.5f", dist);
+                sendLogs(msg);
+                //sendLogs("Kill_switch_position");
+                fprintf(stderr, "[%s] DEBUG: KILL SWITCH DIRECTION\n",
+                        ENTITY_NAME);
+                fprintf(stderr, "[%s] DEBUG: dist = %.5f, prev_dist = %.5f\n",
+                        ENTITY_NAME,
+                        dist,
+                        prev_dist);
+            }
+            return 0;
+        }
+    }
+    return 0;
 }

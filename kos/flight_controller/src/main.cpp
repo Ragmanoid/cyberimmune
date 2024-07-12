@@ -199,6 +199,9 @@ int main(void) {
         if(!validatePosition(copter.currentPosition, absolutePositions[nextWaypointIdx - 1], absolutePositions[nextWaypointIdx]))
             return EXIT_FAILURE;
 
+        // Валидация выполнения полетного задания
+        validateDirection(copter);
+
 
         // Валидация скорости
         if (currentTime() - dynamicLastUpdate > SPEED_SCAN_RATE_MS) {
