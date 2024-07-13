@@ -10,7 +10,7 @@
 #define MAX_SPEED 2 // Максимальная скорость, м/c
 #define MAX_PERMITTED_DIST_KILL_SWITCH 6 // Максимальное отклонение от траектории для выключения, м
 #define MAX_PERMITTED_DIST_CHANGE_WP 1 // Максимальное отклонение от траектории для выключения, м
-#define MAX_ALT_DIF 50 // Погрешность высоты для переноса точки, см
+#define MAX_ALT_DIF 30 // Погрешность высоты для переноса точки, см
 #define MAX_ALT_KILL_SWITCH 200 // Погрешность высоты для выключения двигателей, см
 #define DIST_TOLERANCE 3
 
@@ -113,16 +113,6 @@ int validatePosition(Position dronePosition, Position prevWaypoint, Position nex
             status = 1;
         else status = 0;
 
-        // if (status) error_count++;
-        // else error_count = 0;
-
-        if (error_count > 5)
-        {
-            char msg[100] = {0}; 
-            snprintf(msg, 100, "Dist:%.5f", dist);
-            sendLogs(msg);
-        }
-        error_count = (error_count + 1) % 6;
         if (!status)
         {
             setKillSwitch(0);
@@ -151,15 +141,14 @@ int validatePosition(Position dronePosition, Position prevWaypoint, Position nex
 
 int validateAltitude(Position dronePosition, Position nextWaypoint)
 {
-    static int error_count = 0;
-    if (currentTime() - lastAltitudeTime > 700)
-    {
-        lastAltitudeTime = currentTime();
-        if ((dronePosition.altitude - nextWaypoint.altitude) > MAX_ALT_DIF &&
-            abs(dronePosition.altitude - nextWaypoint.altitude) < MAX_ALT_KILL_SWITCH)
+
+    if ((dronePosition.altitude - nextWaypoint.altitude) > MAX_ALT_DIF &&
+        abs(dronePosition.altitude - nextWaypoint.altitude) < MAX_ALT_KILL_SWITCH)
         {
-            if (changeAltitude(nextWaypoint.homeAltitude))
+            if (currentTime() - lastAltitudeTime > 700)
             {
+                lastAltitudeTime = currentTime();
+                changeAltitude(nextWaypoint.homeAltitude);
                 if (LOG_ALT) {
                     fprintf(stderr, "[%s] DEBUG: Drone altitude = %d, wp altitude = %d, dif = %d\n",
                                 ENTITY_NAME,
@@ -176,7 +165,6 @@ int validateAltitude(Position dronePosition, Position nextWaypoint)
         }
         else if ((dronePosition.altitude - nextWaypoint.altitude) > MAX_ALT_KILL_SWITCH)
         {
-            error_count++;
             if (killSwitchIsPermitted)
             {
                 setKillSwitch(0);
@@ -191,8 +179,7 @@ int validateAltitude(Position dronePosition, Position nextWaypoint)
                 return 0;
             }
         }
-        else error_count = 0;
-    }
+
     return 1;
 }
 
