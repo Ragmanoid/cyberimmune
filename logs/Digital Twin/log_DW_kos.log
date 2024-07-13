@@ -1,0 +1,812 @@
+-- Cross compiling to: KOS-GNU-dynamic 1.2.0.45
+-- Processor: aarch64
+-- Compiler: GCC
+-- CMake generates Unix Makefiles
+-- Found rump: /opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/include (found version "8.99.39") found components: KERN_LIB 
+-- Found bsp: /opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/include (found version "0.0.1") found components: CLIENT_LIB 
+-- Found rump: /opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/include (found version "8.99.39") found components: NET_LIB KERN_LIB 
+-- Found vfs: /opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/include;/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/include (found version "2.4.0")  
+-- Found bsp: /opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/include (found version "0.0.1") found components: ENTITY 
+-- Found vfs: /opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/include;/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/include;/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/include (found version "2.4.0") found components: ENTITY 
+-- Found rump: /opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/include (found version "8.99.39") found components: DHCPCD_ENTITY 
+-- Found vfs: /opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/include;/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/include;/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/include;/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/include (found version "2.4.0") found components: ENTITY 
+-- IMAGE_BINARY_DIR_BIN: /home/mkriv/cyberimmune/kos/build_sim_online/einit/simulator_online
+-- Building image without aboot files
+-- IMAGE_BINARY_DIR_BIN: /home/mkriv/cyberimmune/kos/build_sim_online/einit/simulator_online
+-- Building image without aboot files
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/mkriv/cyberimmune/kos/build_sim_online
+[  1%] Built target initialization_idl_files_copy_drone_controller.Initialization.idl
+[  2%] Built target server_connector_idl_files_copy_drone_controller.ServerConnectorInterface.idl
+[  3%] Built target server_connector_edl_files_copy_drone_controller.ServerConnector.edl
+[  5%] Built target server_connector_edl_files_gen_drone_controller.ServerConnector.edl
+[  6%] Built target server_connector_idl_files_gen_drone_controller.ServerConnectorInterface.idl
+[  7%] Built target initialization_idl_files_gen_drone_controller.Initialization.idl
+[  7%] Built target initialization_idl_files
+[  8%] Built target server_connector_idl_files
+[  8%] Built target server_connector_edl_files
+[ 14%] Built target ServerConnector
+[ 14%] Built target autopilot_connector_idl_files_copy_drone_controller.AutopilotConnectorInterface.idl
+[ 15%] Built target autopilot_connector_edl_files_copy_drone_controller.AutopilotConnector.edl
+[ 16%] Built target autopilot_connector_edl_files_gen_drone_controller.AutopilotConnector.edl
+[ 17%] Built target autopilot_connector_idl_files_gen_drone_controller.AutopilotConnectorInterface.idl
+[ 19%] Built target autopilot_connector_idl_files
+[ 20%] Built target autopilot_connector_edl_files
+[ 25%] Built target AutopilotConnector
+[ 25%] Built target credential_manager_idl_files_copy_drone_controller.CredentialManagerInterface.idl
+[ 26%] Built target credential_manager_edl_files_copy_drone_controller.CredentialManager.edl
+[ 28%] Built target credential_manager_edl_files_gen_drone_controller.CredentialManager.edl
+[ 29%] Built target credential_manager_idl_files_gen_drone_controller.CredentialManagerInterface.idl
+[ 30%] Built target credential_manager_idl_files
+[ 32%] Built target credential_manager_edl_files
+[ 39%] Built target CredentialManager
+[ 41%] Built target navigation_system_idl_files_copy_drone_controller.NavigationSystemInterface.idl
+[ 42%] Built target periphery_controller_idl_files_copy_drone_controller.PeripheryControllerInterface.idl
+[ 43%] Built target flight_controller_edl_files_copy_drone_controller.FlightController.edl
+[ 44%] Built target flight_controller_edl_files_gen_drone_controller.FlightController.edl
+[ 46%] Built target navigation_system_idl_files_gen_drone_controller.NavigationSystemInterface.idl
+[ 47%] Built target navigation_system_idl_files
+[ 48%] Built target periphery_controller_idl_files_gen_drone_controller.PeripheryControllerInterface.idl
+[ 50%] Built target periphery_controller_idl_files
+[ 51%] Built target flight_controller_edl_files
+[ 51%] Building CXX object flight_controller/CMakeFiles/FlightController.dir/src/main.cpp.o
+/home/mkriv/cyberimmune/kos/flight_controller/src/main.cpp: In function 'int main()':
+/home/mkriv/cyberimmune/kos/flight_controller/src/main.cpp:68:23: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+   68 |     sendSignedMessage("/api/auth", authResponse, "authentication", RETRY_DELAY_SEC);
+      |                       ^~~~~~~~~~~
+/home/mkriv/cyberimmune/kos/flight_controller/src/main.cpp:68:50: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+   68 |     sendSignedMessage("/api/auth", authResponse, "authentication", RETRY_DELAY_SEC);
+      |                                                  ^~~~~~~~~~~~~~~~
+/home/mkriv/cyberimmune/kos/flight_controller/src/main.cpp:74:31: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+   74 |         if (sendSignedMessage("/api/fmission_kos", missionResponse, "mission", RETRY_DELAY_SEC) &&
+      |                               ^~~~~~~~~~~~~~~~~~~
+/home/mkriv/cyberimmune/kos/flight_controller/src/main.cpp:74:69: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+   74 |  if (sendSignedMessage("/api/fmission_kos", missionResponse, "mission", RETRY_DELAY_SEC) &&
+      |                                                              ^~~~~~~~~
+
+/home/mkriv/cyberimmune/kos/flight_controller/src/main.cpp:97:27: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+   97 |         sendSignedMessage("/api/arm", armRespone, "arm", RETRY_DELAY_SEC);
+      |                           ^~~~~~~~~~
+/home/mkriv/cyberimmune/kos/flight_controller/src/main.cpp:97:51: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+   97 |         sendSignedMessage("/api/arm", armRespone, "arm", RETRY_DELAY_SEC);
+      |                                                   ^~~~~
+/home/mkriv/cyberimmune/kos/flight_controller/src/main.cpp:137:41: warning: conversion to 'int' from 'uint32_t' {aka 'unsigned int'} may change the sign of the result [-Wsign-conversion]
+  137 |     int waypointCount = getWaypointCount();
+      |                         ~~~~~~~~~~~~~~~~^~
+/home/mkriv/cyberimmune/kos/flight_controller/src/main.cpp:148:14: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+  148 |     sendLogs("Mission started");
+      |              ^~~~~~~~~~~~~~~~~
+/home/mkriv/cyberimmune/kos/flight_controller/src/main.cpp:158:30: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+  158 |                     sendLogs("Mission_paused");
+      |                              ^~~~~~~~~~~~~~~~
+/home/mkriv/cyberimmune/kos/flight_controller/src/main.cpp:167:26: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+  167 |                 sendLogs("Mission_resumed");
+      |                          ^~~~~~~~~~~~~~~~~
+/home/mkriv/cyberimmune/kos/flight_controller/src/main.cpp:141:12: warning: unused variable 'dist' [-Wunused-variable]
+  141 |     double dist;
+      |            ^~~~
+In file included from /home/mkriv/cyberimmune/kos/flight_controller/src/main.cpp:5:
+/home/mkriv/cyberimmune/kos/flight_controller/src/../../shared/include/initialization_interface.h: At global scope:
+/home/mkriv/cyberimmune/kos/flight_controller/src/../../shared/include/initialization_interface.h:15:31: warning: 'drone_controller_Initialization* CreateInitializationImpl()' defined but not used [-Wunused-function]
+   15 | static struct Initialization *CreateInitializationImpl(void) {
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~
+[ 52%] Building CXX object flight_controller/CMakeFiles/FlightController.dir/src/validations.cpp.o
+/home/mkriv/cyberimmune/kos/flight_controller/src/validations.cpp: In function 'int validateSpeed(DynamicPosition)':
+/home/mkriv/cyberimmune/kos/flight_controller/src/validations.cpp:51:18: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+   51 |         sendLogs("Set_speed");
+      |                  ^~~~~~~~~~~
+/home/mkriv/cyberimmune/kos/flight_controller/src/validations.cpp: In function 'int validateCargo(DynamicPosition, Position)':
+/home/mkriv/cyberimmune/kos/flight_controller/src/validations.cpp:82:26: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+   82 |                 sendLogs("Cargo_unlocked");
+      |                          ^~~~~~~~~~~~~~~~
+/home/mkriv/cyberimmune/kos/flight_controller/src/validations.cpp:87:26: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+   87 |                 sendLogs("Cargo_locked");
+      |                          ^~~~~~~~~~~~~~
+/home/mkriv/cyberimmune/kos/flight_controller/src/validations.cpp: In function 'int validatePosition(Position, Position, Position)':
+/home/mkriv/cyberimmune/kos/flight_controller/src/validations.cpp:98:16: warning: unused variable 'error_count' [-Wunused-variable]
+   98 |     static int error_count = 0;
+      |                ^~~~~~~~~~~
+/home/mkriv/cyberimmune/kos/flight_controller/src/validations.cpp: In function 'int validateAltitude(Position, Position)':
+/home/mkriv/cyberimmune/kos/flight_controller/src/validations.cpp:181:26: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+  181 |                 sendLogs("Kill_switch_altitude");
+      |                          ^~~~~~~~~~~~~~~~~~~~~~
+/home/mkriv/cyberimmune/kos/flight_controller/src/validations.cpp: In function 'int validateDirection(Position, Position)':
+/home/mkriv/cyberimmune/kos/flight_controller/src/validations.cpp:208:74: warning: format '%f' expects a matching 'double' argument [-Wformat=]
+  208 |                 fprintf(stderr, "[%s] DEBUG: dist = %.5f, prev_dist = %.5f\n",
+      |                                                                       ~~~^
+      |                                                                          |
+      |                                                                          double
+/home/mkriv/cyberimmune/kos/flight_controller/src/validations.cpp:191:16: warning: unused variable 'error_count' [-Wunused-variable]
+  191 |     static int error_count = 0;
+      |                ^~~~~~~~~~~
+/home/mkriv/cyberimmune/kos/flight_controller/src/validations.cpp: At global scope:
+/home/mkriv/cyberimmune/kos/flight_controller/src/validations.cpp:191:16: warning: 'error_count' defined but not used [-Wunused-variable]
+/home/mkriv/cyberimmune/kos/flight_controller/src/validations.cpp:98:16: warning: 'error_count' defined but not used [-Wunused-variable]
+   98 |     static int error_count = 0;
+      |                ^~~~~~~~~~~
+[ 53%] Linking CXX executable FlightController
+[ 65%] Built target FlightController
+[ 66%] Built target navigation_system_edl_files_copy_drone_controller.NavigationSystem.edl
+[ 67%] Built target navigation_system_edl_files_gen_drone_controller.NavigationSystem.edl
+[ 67%] Built target navigation_system_edl_files
+[ 76%] Built target NavigationSystem
+[ 78%] Built target periphery_controller_edl_files_copy_drone_controller.PeripheryController.edl
+[ 79%] Built target periphery_controller_edl_files_gen_drone_controller.PeripheryController.edl
+[ 79%] Built target periphery_controller_edl_files
+[ 88%] Built target PeripheryController
+[ 89%] Generating BUILD_ID_kos-qemu-image
+...
+Produced build-id symbols.
+[ 89%] Built target GET_BUILD_ID_kos-qemu-image
+[ 89%] Built target mmc0.img
+[ 89%] Built target EinitQemu-edl_copy_kl.Einit.edl
+[ 91%] Built target EinitQemu-edl
+[ 94%] Built target EinitQemu
+[ 94%] Built target EinitQemu-kss-entities-built
+[ 96%] Built target EinitQemu-kss-makekss-output
+[ 97%] Generating KasperskyOS image: /home/mkriv/cyberimmune/kos/build_sim_online/einit/simulator_online/kos-qemu-image
+/opt/KasperskyOS-Community-Edition-1.2.0.45/toolchain/bin/aarch64-kos-gcc
+Checking root directory.. /opt/KasperskyOS-Community-Edition-1.2.0.45/sysroot-aarch64-kos
+Checking entity: /home/mkriv/cyberimmune/kos/resources/hdd/etc/wpa_supplicant.conf... ok
+Checking entity: /home/mkriv/cyberimmune/kos/resources/hdd/etc/dhcpcd.conf... ok
+Checking entity: /home/mkriv/cyberimmune/kos/build_sim_online/autopilot_connector/AutopilotConnector... ok
+Checking entity: /home/mkriv/cyberimmune/kos/build_sim_online/credential_manager/CredentialManager... ok
+Checking entity: /home/mkriv/cyberimmune/kos/build_sim_online/flight_controller/FlightController... ok
+Checking entity: /home/mkriv/cyberimmune/kos/build_sim_online/navigation_system/NavigationSystem... ok
+Checking entity: /home/mkriv/cyberimmune/kos/build_sim_online/periphery_controller/PeripheryController... ok
+Checking entity: /home/mkriv/cyberimmune/kos/build_sim_online/server_connector/ServerConnector... ok
+Checking entity: /opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/wpa_supplicant... ok
+Checking entity: /opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/VfsNet... ok
+Checking entity: /opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/dhcpcd_entity... ok
+Checking entity: /opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/VfsSdCardFs... ok
+Checking entity: /opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/Entropy... ok
+Checking entity: /opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/dnet_entity... ok
+Checking entity: /opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/sdcard_qemu... ok
+Checking entity: /opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/bcm2711_mbox_arm2vc_qemu... ok
+Checking entity: /opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/bsp_qemu... ok
+Checking entity: /home/mkriv/cyberimmune/kos/build_sim_online/einit/simulator_online/EinitQemu-kss/ksm.module... ok
+Checking linker.. /opt/KasperskyOS-Community-Edition-1.2.0.45/toolchain/bin/aarch64-kos-gcc
+Checking assembler.. /opt/KasperskyOS-Community-Edition-1.2.0.45/toolchain/bin/aarch64-kos-gcc
+Checking objdump.. /opt/KasperskyOS-Community-Edition-1.2.0.45/toolchain/bin/aarch64-kos-objdump
+Checking readelf.. /opt/KasperskyOS-Community-Edition-1.2.0.45/toolchain/bin/aarch64-kos-readelf
+Checking piggy asm.. /tmp/tmp.jgp9lSLMEg
+Checking piggy obj.. /tmp/tmp.vrrTfhOiiS
+.section .romfs, "w", %progbits
+__romfs_Base:
+.long 19
+# [File #0] 'einit', path: '/home/mkriv/cyberimmune/kos/build_sim_online/einit/simulator_online/EinitQemu'
+.long __file0_Name - __romfs_Base
+.long __file0_DataBegin - __romfs_Base
+.long __file0_DataEnd - __file0_DataBegin
+# [File #1] 'wpa_supplicant.conf', path: '/home/mkriv/cyberimmune/kos/resources/hdd/etc/wpa_supplicant.conf'
+.long __file1_Name - __romfs_Base
+.long __file1_DataBegin - __romfs_Base
+.long __file1_DataEnd - __file1_DataBegin
+# [File #2] 'dhcpcd.conf', path: '/home/mkriv/cyberimmune/kos/resources/hdd/etc/dhcpcd.conf'
+.long __file2_Name - __romfs_Base
+.long __file2_DataBegin - __romfs_Base
+.long __file2_DataEnd - __file2_DataBegin
+# [File #3] 'AutopilotConnector', path: '/home/mkriv/cyberimmune/kos/build_sim_online/autopilot_connector/AutopilotConnector'
+.long __file3_Name - __romfs_Base
+.long __file3_DataBegin - __romfs_Base
+.long __file3_DataEnd - __file3_DataBegin
+# [File #4] 'CredentialManager', path: '/home/mkriv/cyberimmune/kos/build_sim_online/credential_manager/CredentialManager'
+.long __file4_Name - __romfs_Base
+.long __file4_DataBegin - __romfs_Base
+.long __file4_DataEnd - __file4_DataBegin
+# [File #5] 'FlightController', path: '/home/mkriv/cyberimmune/kos/build_sim_online/flight_controller/FlightController'
+.long __file5_Name - __romfs_Base
+.long __file5_DataBegin - __romfs_Base
+.long __file5_DataEnd - __file5_DataBegin
+# [File #6] 'NavigationSystem', path: '/home/mkriv/cyberimmune/kos/build_sim_online/navigation_system/NavigationSystem'
+.long __file6_Name - __romfs_Base
+.long __file6_DataBegin - __romfs_Base
+.long __file6_DataEnd - __file6_DataBegin
+# [File #7] 'PeripheryController', path: '/home/mkriv/cyberimmune/kos/build_sim_online/periphery_controller/PeripheryController'
+.long __file7_Name - __romfs_Base
+.long __file7_DataBegin - __romfs_Base
+.long __file7_DataEnd - __file7_DataBegin
+# [File #8] 'ServerConnector', path: '/home/mkriv/cyberimmune/kos/build_sim_online/server_connector/ServerConnector'
+.long __file8_Name - __romfs_Base
+.long __file8_DataBegin - __romfs_Base
+.long __file8_DataEnd - __file8_DataBegin
+# [File #9] 'wpa_supplicant', path: '/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/wpa_supplicant'
+.long __file9_Name - __romfs_Base
+.long __file9_DataBegin - __romfs_Base
+.long __file9_DataEnd - __file9_DataBegin
+# [File #10] 'VfsNet', path: '/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/VfsNet'
+.long __file10_Name - __romfs_Base
+.long __file10_DataBegin - __romfs_Base
+.long __file10_DataEnd - __file10_DataBegin
+# [File #11] 'dhcpcd_entity', path: '/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/dhcpcd_entity'
+.long __file11_Name - __romfs_Base
+.long __file11_DataBegin - __romfs_Base
+.long __file11_DataEnd - __file11_DataBegin
+# [File #12] 'VfsSdCardFs', path: '/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/VfsSdCardFs'
+.long __file12_Name - __romfs_Base
+.long __file12_DataBegin - __romfs_Base
+.long __file12_DataEnd - __file12_DataBegin
+# [File #13] 'Entropy', path: '/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/Entropy'
+.long __file13_Name - __romfs_Base
+.long __file13_DataBegin - __romfs_Base
+.long __file13_DataEnd - __file13_DataBegin
+# [File #14] 'dnet_entity', path: '/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/dnet_entity'
+.long __file14_Name - __romfs_Base
+.long __file14_DataBegin - __romfs_Base
+.long __file14_DataEnd - __file14_DataBegin
+# [File #15] 'sdcard_qemu', path: '/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/sdcard_qemu'
+.long __file15_Name - __romfs_Base
+.long __file15_DataBegin - __romfs_Base
+.long __file15_DataEnd - __file15_DataBegin
+# [File #16] 'bcm2711_mbox_arm2vc_qemu', path: '/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/bcm2711_mbox_arm2vc_qemu'
+.long __file16_Name - __romfs_Base
+.long __file16_DataBegin - __romfs_Base
+.long __file16_DataEnd - __file16_DataBegin
+# [File #17] 'bsp_qemu', path: '/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/bsp_qemu'
+.long __file17_Name - __romfs_Base
+.long __file17_DataBegin - __romfs_Base
+.long __file17_DataEnd - __file17_DataBegin
+# [File #18] 'ksm.module', path: '/home/mkriv/cyberimmune/kos/build_sim_online/einit/simulator_online/EinitQemu-kss/ksm.module'
+.long __file18_Name - __romfs_Base
+.long __file18_DataBegin - __romfs_Base
+.long __file18_DataEnd - __file18_DataBegin
+__file0_Name:
+.asciz "einit"
+__file1_Name:
+.asciz "wpa_supplicant.conf"
+__file2_Name:
+.asciz "dhcpcd.conf"
+__file3_Name:
+.asciz "AutopilotConnector"
+__file4_Name:
+.asciz "CredentialManager"
+__file5_Name:
+.asciz "FlightController"
+__file6_Name:
+.asciz "NavigationSystem"
+__file7_Name:
+.asciz "PeripheryController"
+__file8_Name:
+.asciz "ServerConnector"
+__file9_Name:
+.asciz "wpa_supplicant"
+__file10_Name:
+.asciz "VfsNet"
+__file11_Name:
+.asciz "dhcpcd_entity"
+__file12_Name:
+.asciz "VfsSdCardFs"
+__file13_Name:
+.asciz "Entropy"
+__file14_Name:
+.asciz "dnet_entity"
+__file15_Name:
+.asciz "sdcard_qemu"
+__file16_Name:
+.asciz "bcm2711_mbox_arm2vc_qemu"
+__file17_Name:
+.asciz "bsp_qemu"
+__file18_Name:
+.asciz "ksm.module"
+.p2align 12
+__file0_DataBegin:
+.incbin "/home/mkriv/cyberimmune/kos/build_sim_online/einit/simulator_online/EinitQemu"
+__file0_DataEnd:
+.p2align 12
+__file1_DataBegin:
+.incbin "/home/mkriv/cyberimmune/kos/resources/hdd/etc/wpa_supplicant.conf"
+__file1_DataEnd:
+.p2align 12
+__file2_DataBegin:
+.incbin "/home/mkriv/cyberimmune/kos/resources/hdd/etc/dhcpcd.conf"
+__file2_DataEnd:
+.p2align 12
+__file3_DataBegin:
+.incbin "/home/mkriv/cyberimmune/kos/build_sim_online/autopilot_connector/AutopilotConnector"
+__file3_DataEnd:
+.p2align 12
+__file4_DataBegin:
+.incbin "/home/mkriv/cyberimmune/kos/build_sim_online/credential_manager/CredentialManager"
+__file4_DataEnd:
+.p2align 12
+__file5_DataBegin:
+.incbin "/home/mkriv/cyberimmune/kos/build_sim_online/flight_controller/FlightController"
+__file5_DataEnd:
+.p2align 12
+__file6_DataBegin:
+.incbin "/home/mkriv/cyberimmune/kos/build_sim_online/navigation_system/NavigationSystem"
+__file6_DataEnd:
+.p2align 12
+__file7_DataBegin:
+.incbin "/home/mkriv/cyberimmune/kos/build_sim_online/periphery_controller/PeripheryController"
+__file7_DataEnd:
+.p2align 12
+__file8_DataBegin:
+.incbin "/home/mkriv/cyberimmune/kos/build_sim_online/server_connector/ServerConnector"
+__file8_DataEnd:
+.p2align 12
+__file9_DataBegin:
+.incbin "/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/wpa_supplicant"
+__file9_DataEnd:
+.p2align 12
+__file10_DataBegin:
+.incbin "/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/VfsNet"
+__file10_DataEnd:
+.p2align 12
+__file11_DataBegin:
+.incbin "/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/dhcpcd_entity"
+__file11_DataEnd:
+.p2align 12
+__file12_DataBegin:
+.incbin "/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/VfsSdCardFs"
+__file12_DataEnd:
+.p2align 12
+__file13_DataBegin:
+.incbin "/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/Entropy"
+__file13_DataEnd:
+.p2align 12
+__file14_DataBegin:
+.incbin "/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/dnet_entity"
+__file14_DataEnd:
+.p2align 12
+__file15_DataBegin:
+.incbin "/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/sdcard_qemu"
+__file15_DataEnd:
+.p2align 12
+__file16_DataBegin:
+.incbin "/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/bcm2711_mbox_arm2vc_qemu"
+__file16_DataEnd:
+.p2align 12
+__file17_DataBegin:
+.incbin "/opt/KasperskyOS-Local-Edition/sysroot-aarch64-kos/bin/bsp_qemu"
+__file17_DataEnd:
+.p2align 12
+__file18_DataBegin:
+.incbin "/home/mkriv/cyberimmune/kos/build_sim_online/einit/simulator_online/EinitQemu-kss/ksm.module"
+__file18_DataEnd:
+.p2align 12
+Assembling piggy file:  ... /opt/KasperskyOS-Community-Edition-1.2.0.45/toolchain/bin/aarch64-kos-gcc  -x assembler -c  -o /tmp/tmp.vrrTfhOiiS /tmp/tmp.jgp9lSLMEg
+ok /tmp/tmp.vrrTfhOiiS
+Generating romfs file...
+Linking image: /home/mkriv/cyberimmune/kos/build_sim_online/einit/simulator_online/kos-qemu-image ... /opt/KasperskyOS-Community-Edition-1.2.0.45/toolchain/bin/aarch64-kos-gcc -nostdlib -no-pie -no-pie -o /home/mkriv/cyberimmune/kos/build_sim_online/einit/simulator_online/kos-qemu-image -T /opt/KasperskyOS-Community-Edition-1.2.0.45/sysroot-aarch64-kos/../libexec/aarch64-kos/kos-qemu.ld -Wl,-Map=/home/mkriv/cyberimmune/kos/build_sim_online/einit/simulator_online/kos-qemu-image.map /opt/KasperskyOS-Community-Edition-1.2.0.45/sysroot-aarch64-kos/../libexec/aarch64-kos/kos-qemu /tmp/tmp.vrrTfhOiiS -lgcc
+ok
+Generating binary image...
+/opt/KasperskyOS-Community-Edition-1.2.0.45/toolchain/bin/makeimg: line 199: dtc: command not found
+stat: cannot statx '/home/mkriv/cyberimmune/kos/build_sim_online/einit/simulator_online/kos-qemu-image.bin': No such file or directory
+Generating stripped image...
+[ 98%] Built target kos-qemu-image
+[100%] Running QEMU with KasperskyOS image...
+qemu-system-aarch64: warning: netdev net0 has no peer
+[BOOT ] Starting...
+[BOOT ] Setting up architecture...
+[BOOT ] Built CPU Identity table using LIN:
+[BOOT ] Hardware ID of CPU #0: 0x0
+[BOOT ] Hardware ID of CPU #1: 0x1
+[BOOT ] Hardware ID of CPU #2: 0x2
+[BOOT ] Hardware ID of CPU #3: 0x3
+[BOOT ] Preparing memory...
+[BOOT ] Preparing ROMFS...
+[BOOT ] Preparing KasperskyOS kernel...
+[BOOT ] Preparing trampoline to kernel...
+[BOOT ] Preparing page table...
+[BOOT ] Preparing modules...
+[BOOT ] Freeing loader memory...
+[BOOT ] Dump physical memory map
+[BOOT ] Starting KasperskyOS...
+[HAL  ] Exceptions initialized
+
+Loading:
+ _  __                             _           ___  ____
+| |/ /__ _ ___ _ __   ___ _ __ ___| | ___   _ / _ \/ ___|
+| ' // _` / __| '_ \ / _ \ '__/ __| |/ / | | | | | \___ \
+| . \ (_| \__ \ |_) |  __/ |  \__ \   <| |_| | |_| |___) |
+|_|\_\__,_|___/ .__/ \___|_|  |___/_|\_\\__, |\___/|____/
+              |_|                       |___/
+
+
+Built on:   Dec 13 2023 08:28:08
+Board:      vexpress_qemu
+SoC:        v2pca15
+ARCH:       arm64
+Git hash:   autosar-developer-x86-64-qemu-v4.2.0.4-874-gc3b52bf52aab059747208db3803ec73cbd58b6d6
+
+
+Found CPU: ARMv8
+System control register:
+	Instruction cache: enabled
+	Data cache: enabled
+[HAL  ] Internal PFN-allocator initiated.
+[HAL  ] Private Area begin : 0x0000000000001000
+[HAL  ] Private Area end : 0x00007f7fffffffff
+[HAL  ] Private Area size : 0x00007f7ffffff000
+[HAL  ] Shared Area begin : 0xffff808000000000
+[HAL  ] Shared Area end  : 0xffffffffffffffff
+[HAL  ] Shared Area size : 0x00007f8000000000
+[HAL  ] PTE Table Area begin : 0xffff800000000000
+[HAL  ] PTE Table Area end : 0xffff807fffffffff
+[HAL  ] PTE Table Area size : 0x0000008000000000
+[HAL  ] cpu #0 - 1386MHz
+[HAL  ] Cpu initialized.
+[HAL  ] Temporary PTEs area has been initialized.
+[HAL  ] Shared area has been initialized.
+[HAL  ] Clean area has been initialized.
+[HAL  ] MMU initialization - Done.
+[HAL  ] WXN protection enabled.
+[HAL  ] Zero space initialized.
+[HAL  ] Found GICv2 with 160 interrupts.
+[HAL  ] Interrupts initiated.
+[HAL  ] Bootstrap Processor's ID - 0
+CPU0 - boot strap processor
+CPU1 - ordinary processor
+CPU2 - ordinary processor
+CPU3 - ordinary processor
+[HAL  ] Hardware Abstraction Layer successfully initialized.
+[INIT ] Starting core...
+[MM   ] Max pfns         : 0x0000001000000000
+[MM   ] Max kernel VAD   : 0x0000100000000000
+[MM   ] Max user VAD     : 0x0000600000000000
+[MM   ] Max buddy order  : 0x0000000000000010
+[MM   ] PageInfo size    : 0x0000000000000020
+[MM   ] Pfn DB begin     : 0xffffc00005000000
+[MM   ] Pfn DB end       : 0xffffc40004ffffff
+[MM   ] Pfn DB size      : 0x0000040000000000
+[MM   ] Kmalloc begin    : 0xffffc40005000000
+[MM   ] Kmalloc end      : 0xffffc40008ffffff
+[MM   ] Kmalloc size     : 0x0000000004000000
+[MM   ] Kernel VAD begin : 0xffff808000000000
+[MM   ] Kernel VAD end   : 0xffffffffffffffff
+[MM   ] Kernel VAD size  : 0x00007f8000000000
+[MM   ] User VAD begin   : 0x0000000000001000
+[MM   ] User VAD end     : 0x00007f7fffffffff
+[MM   ] User VAD size    : 0x00007f7ffffff000
+[MM   ] PFN range #01[__x] begin : 0x0000000000080000
+[MM   ] PFN range #01[__x] end : 0x0000000000080052
+[MM   ] PFN range #01[__x] size : 0x0000000000000053
+[MM   ] PFN range #02[r__] begin : 0x0000000000080053
+[MM   ] PFN range #02[r__] end : 0x000000000008005e
+[MM   ] PFN range #02[r__] size : 0x000000000000000c
+[MM   ] PFN range #03[___] begin : 0x000000000008005f
+[MM   ] PFN range #03[___] end : 0x000000000008005f
+[MM   ] PFN range #03[___] size : 0x0000000000000001
+[MM   ] PFN range #04[rw_] begin : 0x0000000000080060
+[MM   ] PFN range #04[rw_] end : 0x00000000000801ed
+[MM   ] PFN range #04[rw_] size : 0x000000000000018e
+[MM   ] PFN range #05[rw_] begin : 0x00000000000801ee
+[MM   ] PFN range #05[rw_] end : 0x00000000000801f8
+[MM   ] PFN range #05[rw_] size : 0x000000000000000b
+[MM   ] PFN range #06[rwx] begin : 0x00000000000801f9
+[MM   ] PFN range #06[rwx] end : 0x00000000000802f6
+[MM   ] PFN range #06[rwx] size : 0x00000000000000fe
+[MM   ] PFN range #07[rwx] begin : 0x00000000000802f7
+[MM   ] PFN range #07[rwx] end : 0x0000000000082009
+[MM   ] PFN range #07[rwx] size : 0x0000000000001d13
+[MM   ] PFN range #08[__x] begin : 0x000000000008200a
+[MM   ] PFN range #08[__x] end : 0x000000000008200a
+[MM   ] PFN range #08[__x] size : 0x0000000000000001
+[MM   ] PFN range #09[rwx] begin : 0x000000000008200b
+[MM   ] PFN range #09[rwx] end : 0x00000000000820b5
+[MM   ] PFN range #09[rwx] size : 0x00000000000000ab
+[MM   ] PFN range #10[rwx] begin : 0x00000000000820b6
+[MM   ] PFN range #10[rwx] end : 0x0000000000083b44
+[MM   ] PFN range #10[rwx] size : 0x0000000000001a8f
+[MM   ] PFN range #11[rwx] begin : 0x0000000000083b45
+[MM   ] PFN range #11[rwx] end : 0x00000000000dffff
+[MM   ] PFN range #11[rwx] size : 0x000000000005c4bb
+[MM   ] Range mapped begin : 0xffffc00006000000
+[MM   ] Range mapped end : 0xffffc00006bfffff
+[MM   ] Range mapped size : 0x0000000000c00000
+[MM   ] PFN DB size: 12288 KB
+[MM   ] PFN database created.
+[MM   ] Add PFN range begin : 0x0000000080efd000
+[MM   ] Add PFN range end : 0x0000000082009fff
+[MM   ] Add PFN range size : 0x000000000110d000
+[MM   ] Add PFN range begin : 0x000000008200b000
+[MM   ] Add PFN range end : 0x00000000820b5fff
+[MM   ] Add PFN range size : 0x00000000000ab000
+[MM   ] Add PFN range begin : 0x0000000083b45000
+[MM   ] Add PFN range end : 0x00000000dfffffff
+[MM   ] Add PFN range size : 0x000000005c4bb000
+[MM   ] Atomic buddy object created (8 MB).
+[MM   ] Atomic PFN allocator initialized.
+[MM   ] 	cache line size 64
+[MM   ] 	cache line size 64
+[MM   ] 	cache line size 64
+[MM   ] 	cache line size 64
+[MM   ] kmalloc alloc granularity 64
+[MM   ] kalloc allocator created.
+[MM   ] kalloc frontend enabled.
+[PROF ] Profiler statistics initialized.
+[VMM  ] #PF handler was installed.
+[SMP  ] Initializing per-CPU areas...
+[SMP  ] Single per-CPU area size: 8704
+[SMP  ] Total per-CPU area size: 36864
+[UID  ] Uid allocator initialized.
+[SID  ] Sid allocator initialized.
+[IO   ] Initialize MMIO subsystem.
+[IO   ] Initialize DMA subsystem.
+[IO   ] Hardware interrupts successfully initialized.
+[IO   ] Resources registry initialized.
+[VMM  ] System address space initialized.
+[VMM  ] Internal VMM areas initialized.
+[TASK ] Task infrastructure initialized.
+[SMP  ] Idle thread for CPU #0 created.
+[SMP  ] Idle thread for CPU #1 created.
+[SMP  ] Idle thread for CPU #2 created.
+[SMP  ] Idle thread for CPU #3 created.
+[TASK ] Scheduler interrupts initialized.
+[TASK ] GSI page initialized.
+[HAL  ] cpu #2 - 1032MHz
+[HAL  ] cpu #3 - 1034MHz
+[HAL  ] cpu #1 - 1034MHz
+[SMP  ] CPU #2 - boostrapped.
+[SMP  ] CPU #3 - boostrapped.
+[SMP  ] CPU #1 - boostrapped.
+[TASK ] Multitasking infrastructure initialized.
+[TIME ] Time infrastructure initialized.
+[ROFS ] Files: 19, size: 27848704 (0x01a8f000).
+[ROFS ] File #00: einit            - size:   885280 (0x000d8220)
+[ROFS ] File #01: wpa_supplicant.conf - size:      178 (0x000000b2)
+[ROFS ] File #02: dhcpcd.conf      - size:      744 (0x000002e8)
+[ROFS ] File #03: AutopilotConnector - size:  1059632 (0x00102b30)
+[ROFS ] File #04: CredentialManager - size:  1308968 (0x0013f928)
+[ROFS ] File #05: FlightController - size:  1245536 (0x00130160)
+[ROFS ] File #06: NavigationSystem - size:  3008512 (0x002de800)
+[ROFS ] File #07: PeripheryController - size:  1672320 (0x00198480)
+[ROFS ] File #08: ServerConnector  - size:  1042360 (0x000fe7b8)
+[ROFS ] File #09: wpa_supplicant   - size:  4432496 (0x0043a270)
+[ROFS ] File #10: VfsNet           - size:  4400272 (0x00432490)
+[ROFS ] File #11: dhcpcd_entity    - size:  1273200 (0x00136d70)
+[ROFS ] File #12: VfsSdCardFs      - size:  1360080 (0x0014c0d0)
+[ROFS ] File #13: Entropy          - size:   732768 (0x000b2e60)
+[ROFS ] File #14: dnet_entity      - size:  2913192 (0x002c73a8)
+[ROFS ] File #15: sdcard_qemu      - size:   752008 (0x000b7988)
+[ROFS ] File #16: bcm2711_mbox_arm2vc_qemu - size:   672128 (0x000a4180)
+[ROFS ] File #17: bsp_qemu         - size:   668128 (0x000a31e0)
+[ROFS ] File #18: ksm.module       - size:   367208 (0x00059a68)
+[AUDIT] Starting core audit...
+[VLOG ] Virtual logging subsystem initialized.
+[VMM  ] Virtual Memory Manager service initialized.
+[IO   ] I/O subsystem successfully initialized.
+[FS   ] File System Manager successfully initialized.
+[XHCI ] XHCIDBG service initialized.
+[CM   ] Connection Manager successfully initialized.
+[KSM  ] Module: 'ksm.module' loaded.
+[KSM  ] Audit log created.
+[KSM  ] Module: 'ksm.module' initialized.
+[KSM  ] Server: 'kl.core.Core' executed.
+[KSM  ] Security system successfully initialized.
+[INIT ] Starting 'Einit' ...
+[INIT ] Starting system worker.
+[2024-07-13T20:38:27.959][Info][kl.drivers.DNetSrv][29:30][DNET] Server starting.
+[2024-07-13T20:38:27.969][Info][kl.drivers.Bcm2711MboxArmToVc][21:22][BCM2711ARM2VC] Initialize server at channel 'kl.drivers.Bcm2711MboxArmToVc'.
+[2024-07-13T20:38:28.012][Info][kl.drivers.SDCard][41:42][SDCARDSR] Server starting.
+entropy_main: Entropy entity running
+[2024-07-13T20:38:28.040][Info][kl.drivers.SDCard][41:42][PL181] Probe PL181
+[2024-07-13T20:38:28.062][Info][kl.drivers.SDCard][41:42][PL181] Found PL181
+[2024-07-13T20:38:28.386][Error][kl.drivers.DNetSrv][29:30][BCM2711MMC] Reset never completed.
+[2024-07-13T20:38:28.471][Error][kl.drivers.DNetSrv][29:30][BCM2711MMC] Internal clock never stabilized.
+[2024-07-13T20:38:28.474][Info][kl.drivers.SDCard][41:42][BLKPART] MBR:
+[2024-07-13T20:38:28.477][Info][kl.drivers.SDCard][41:42][BLKPART] entry[0] type = 0x0c lbaBegin =        2048 totalSec =      260096
+[2024-07-13T20:38:28.480][Info][kl.drivers.SDCard][41:42][BLKPART] entry[1] type = 0x00 lbaBegin =             totalSec =            
+[2024-07-13T20:38:28.482][Info][kl.drivers.SDCard][41:42][BLKPART] entry[2] type = 0x00 lbaBegin =             totalSec =            
+[2024-07-13T20:38:28.486][Info][kl.drivers.SDCard][41:42][BLKPART] entry[3] type = 0x00 lbaBegin =             totalSec =            
+[2024-07-13T20:38:28.491][Info][kl.drivers.SDCard][41:42][BLKPART] Add MBR/EBR partition 'mmc0_p0', type: 0x0c, lbaBegin:   2048, size: 260096 (in sectors)
+[2024-07-13T20:38:28.500][Info][kl.drivers.SDCard][41:42][PL181] Probe PL181
+[2024-07-13T20:38:28.507][Info][kl.drivers.SDCard][41:42][PL181] Found PL181
+[2024-07-13T20:38:28.522][Error][kl.drivers.DNetSrv][29:30][BCM2711MMC] Internal clock never stabilized.
+[2024-07-13T20:38:28.791][Info][kl.drivers.SDCard][41:42][BLKDEVSR] Port 'mmc0' successfully registered.
+[2024-07-13T20:38:28.809][Info][kl.drivers.SDCard][41:42][PL181] Probe PL181
+[2024-07-13T20:38:28.827][Info][kl.drivers.SDCard][41:42][PL181] Found PL181
+[2024-07-13T20:38:29.083][Info][kl.drivers.SDCard][41:42][BLKDEVSR] Port 'mmc0_p0' successfully registered.
+[2024-07-13T20:38:29.453][Info][kl.VfsNet][53:54][DNETCL] Start client initialization.
+[2024-07-13T20:38:29.456][Info][kl.VfsNet][53:54][DNETCL] Try to connect to server 'kl.drivers.DNet' with interface 'kl.drivers.DNet.dnet'...
+[2024-07-13T20:38:29.536][Error][kl.drivers.DNetSrv][29:30][SDIOBUS] Reset Fail, Code =90000014
+[2024-07-13T20:38:29.537][Info][kl.drivers.DNetSrv][29:30][BCMSDH] Device not supported: vendor = 0x0, device = 0x0
+[2024-07-13T20:38:29.539][Warn][kl.drivers.DNetSrv][29:30][BRCMFDNET] Sdio brcmf not found
+[2024-07-13T20:38:29.961][Info][kl.drivers.DNetSrv][29:30][DNETSR] Port 'soc:smc9118' successfully registered.
+[2024-07-13T20:38:29.982][Info][kl.VfsNet][53:54][DNETCL] Connection with server 'kl.drivers.DNet' established.
+[2024-07-13T20:38:30.132][Info][kl.VfsSdCardFs][71:72][BLKDEVCL] Start client initialization.
+[2024-07-13T20:38:30.147][Info][kl.VfsSdCardFs][71:72][BLKDEVCL] Discovered static channel to server 'kl.drivers.SDCard', endpoint 'kl.drivers.SDCard.sdcard'.
+[2024-07-13T20:38:30.163][Info][kl.VfsSdCardFs][71:72][BLKDEVCL] Connection with server 'kl.drivers.SDCard' established.
+[2024-07-13T20:38:30.196][Info][kl.drivers.SDCard][41:15][PL181] Probe PL181
+[2024-07-13T20:38:30.202][Info][kl.drivers.SDCard][41:15][PL181] Found PL181
+[2024-07-13T20:38:40.672][Info][kl.VfsNet][53:54][ipc_init][VFS-SRV] static connection is used
+[2024-07-13T20:38:40.674][Info][kl.VfsNet][53:54][init_vfs_backend][CRT0] VFS filesystem and network backends initialized with env(server:kl.VfsNet)
+[2024-07-13T20:38:40.692][Info][kl.VfsNet][53:54][init_hostname][ENTITY] hostname is 'kos-host'
+[2024-07-13T20:38:40.701][Info][kl.VfsNet][53:54][VFS_SERVER_OCAP] New client kl.VfsNet create, total:1
+[2024-07-13T20:38:40.759][Info][kl.VfsSdCardFs][71:72][ipc_init][VFS-SRV] static connection is used
+[2024-07-13T20:38:40.765][Info][kl.VfsSdCardFs][71:72][init_vfs_backend][CRT0] VFS filesystem backend initialized with env(server:kl.VfsSdCardFs)
+[2024-07-13T20:38:40.802][Info][kl.VfsSdCardFs][71:72][VFS_SERVER_OCAP] New client kl.VfsSdCardFs create, total:1
+[2024-07-13T20:38:40.910][Info][kl.VfsNet][53:54][_nk_Filesystem_ClientConnected][VFS-SRV] Client with kl.VfsNet connected.
+[2024-07-13T20:38:40.936][Info][kl.rump.Dhcpcd][59:60][init_vfs_backend][2024-07-13T20:38:40.940][Info][kl.VfsNet][53:220][VFS_SERVER_OCAP] New client kl.VfsNet create, total:2
+[CRT0] VFS filesystem and network backends initialized with env(client:kl.VfsNet)
+[2024-07-13T20:38:41.044][Info][kl.VfsSdCardFs][71:72][_nk_Filesystem_ClientConnected][VFS-SRV] Client with kl.VfsSdCardFs connected.
+[2024-07-13T20:38:41.048][Info][drone_controller.CredentialManager][87:88][init_vfs_backend][CRT0] VFS filesystem backend initialized with env(client:kl.VfsSdCardFs)
+dhcpcd-9.4.1 starting
+[2024-07-13T20:38:41.210][Info][kl.VfsNet][53:220][_nk_Filesystem_ClientConnected][2024-07-13T20:38:41.213][Info][kl.VfsNet][53:218][VFS_SERVER_OCAP] New client kl.VfsNet create, total:3
+[VFS-SRV] Client with kl.VfsNet connected.
+[2024-07-13T20:38:41.230][Info][drone_controller.PeripheryController][103:104][init_vfs_backend][CRT0] VFS filesystem and network backends initialized with env(client:kl.VfsNet)
+no interfaces have a carrier
+[2024-07-13T20:38:41.491][Info][kl.VfsNet][53:218][_nk_Filesystem_ClientConnected][VFS-SRV] Client with kl.VfsNet connected.
+[2024-07-13T20:38:41.494][Info][kl.VfsNet][53:215][VFS_SERVER_OCAP] New client kl.VfsNet create, total:4
+[2024-07-13T20:38:41.496][Info][drone_controller.NavigationSystem][95:96][init_vfs_backend][CRT0] VFS filesystem and network backends initialized with env(client:kl.VfsNet)
+en0: waiting for carrier
+en0: carrier unknown, assuming up
+[2024-07-13T20:38:41.732][Info][kl.VfsNet][53:215][_nk_Filesystem_ClientConnected][VFS-SRV] Client with kl.VfsNet connected.
+[2024-07-13T20:38:41.737][Info][drone_controller.ServerConnector][79:80][init_vfs_backend][CRT0] VFS filesystem and network backends initialized with env(client:kl.VfsNet)
+[2024-07-13T20:38:41.754][Info][kl.VfsNet][53:216][VFS_SERVER_OCAP] New client kl.VfsNet create, total:5
+[2024-07-13T20:38:41.941][Info][kl.VfsNet][53:216][_nk_Filesystem_ClientConnected][VFS-SRV] Client with kl.VfsNet connected.
+[2024-07-13T20:38:41.945][Info][drone_controller.AutopilotConnector][111:112][init_vfs_backend][CRT0] VFS filesystem and network backends initialized with env(client:kl.VfsNet)
+en0: soliciting a DHCP lease
+en0: offered 10.0.2.15 from 10.0.2.2
+en0: leased 10.0.2.15 for 86400 seconds
+dhcp_writefile: /var/db/dhcpcd/en0.lease: No such file or directory
+en0: adding route to 10.0.2.0/24
+en0: adding default route via 10.0.2.2
+Failed to create "/etc/resolv.conf.d" dir
+[Server Connector] Info: Initialization is finished
+[Credential Manager] Info: Initialization is finished
+[Autopilot Connector] Info: Initialization is finished
+[Periphery Controller] Warning: Connection to 10.0.2.2:5767 has failed
+[Periphery Controller] Info: Trying again to initialize GPIO pins in 1s
+[Navigation System] Warning: Inconsistent coordinates are received. Trying again in 1s
+[Periphery Controller] Info: Buzzer is disabled
+[Periphery Controller] Info: Initialization is finished
+[Navigation System] Warning: Inconsistent coordinates are received. Trying again in 1s
+[Navigation System] Warning: Inconsistent coordinates are received. Trying again in 1s
+[Navigation System] Warning: Inconsistent coordinates are received. Trying again in 1s
+[Navigation System] Warning: Inconsistent coordinates are received. Trying again in 1s
+[Navigation System] Warning: Inconsistent coordinates are received. Trying again in 1s
+[Navigation System] Warning: Inconsistent coordinates are received. Trying again in 1s
+[Navigation System] Warning: Inconsistent coordinates are received. Trying again in 1s
+[Navigation System] Warning: Inconsistent coordinates are received. Trying again in 1s
+[Navigation System] Warning: Inconsistent coordinates are received. Trying again in 1s
+[Navigation System] Info: Consistent coordinates are received
+[Navigation System] Info: Initialization is finished
+[Flight Controller] Info: Initialization is finished
+[Periphery Controller] Info: Buzzer is enabled
+[Flight Controller] Info: Successfully authenticated on the server
+[Flight Controller] Warning: No mission is available on the server
+[Periphery Controller] Info: Buzzer is disabled
+[Flight Controller] Warning: No mission is available on the server
+[Flight Controller] Warning: No mission is available on the server
+[Flight Controller] Warning: No mission is available on the server
+[Flight Controller] Warning: No mission is available on the server
+[Flight Controller] Warning: No mission is available on the server
+[Flight Controller] Warning: No mission is available on the server
+[Flight Controller] Info: Cargo position lat: 466144263 lon: 1428115774 alt: 70
+[Flight Controller] Info: Cargo position lat: 466144263 lon: 1428115774 alt: 150
+[Flight Controller] Info: Successfully received mission from the server
+[Flight Controller] Info: Mission: 
+[Flight Controller] Info: Home: 466143903, 1428119693, 26119
+[Flight Controller] Info: Takeoff: 150
+[Flight Controller] Info: Waypoint: 466141025, 1428119103, 150
+[Flight Controller] Info: Waypoint: 466141178, 1428117768, 150
+[Flight Controller] Info: Waypoint: 466142964, 1428118017, 150
+[Flight Controller] Info: Waypoint: 466143100, 1428116917, 150
+[Flight Controller] Info: Waypoint: 466141322, 1428116481, 150
+[Flight Controller] Info: Waypoint: 466141407, 1428115150, 150
+[Flight Controller] Info: Waypoint: 466144263, 1428115774, 150
+[Flight Controller] Info: Waypoint: 466144263, 1428115774, 70
+[Flight Controller] Info: Set servo: 5, 1200
+[Flight Controller] Info: Waypoint: 466144263, 1428115774, 150
+[Flight Controller] Info: Set servo: 5, 1800
+[Flight Controller] Info: Waypoint: 466143899, 1428119606, 150
+[Flight Controller] Info: Land: 466143903, 1428119693, 26119
+[Flight Controller] Info: Ready to arm
+[Flight Controller] Info: Received arm request. Notifying the server
+[Flight Controller] Info: Arm is permitted
+[Flight Controller] Info: Normalized positions 12: 
+[Flight Controller] Info Position:
+	Latitude: 46.61439
+	Longitude: 142.81197 
+	Altitude: 69.29000
+[Flight Controller] Info Position:
+	Latitude: 46.61439
+	Longitude: 142.81197 
+	Altitude: 70.79000
+[Flight Controller] Info Position:
+	Latitude: 46.61410
+	Longitude: 142.81191 
+	Altitude: 70.79000
+[Flight Controller] Info Position:
+	Latitude: 46.61412
+	Longitude: 142.81178 
+	Altitude: 70.79000
+[Flight Controller] Info Position:
+	Latitude: 46.61430
+	Longitude: 142.81180 
+	Altitude: 70.79000
+[Flight Controller] Info Position:
+	Latitude: 46.61431
+	Longitude: 142.81169 
+	Altitude: 70.79000
+[Flight Controller] Info Position:
+	Latitude: 46.61413
+	Longitude: 142.81165 
+	Altitude: 70.79000
+[Flight Controller] Info Position:
+	Latitude: 46.61414
+	Longitude: 142.81152 
+	Altitude: 70.79000
+[Flight Controller] Info Position:
+	Latitude: 46.61443
+	Longitude: 142.81158 
+	Altitude: 70.79000
+[Flight Controller] Info Position:
+	Latitude: 46.61443
+	Longitude: 142.81158 
+	Altitude: 69.99000
+[Flight Controller] Info Position:
+	Latitude: 46.61443
+	Longitude: 142.81158 
+	Altitude: 70.79000
+[Flight Controller] Info Position:
+	Latitude: 46.61439
+	Longitude: 142.81196 
+	Altitude: 70.79000
+[Flight Controller] DEBUG: Waypoints count : 12
+[Server Connector] Warning: Failed to parse response content
+[Flight Controller] Warning: Failed to send send_log request through Server Connector. Trying again in 1s
+[Flight Controller] DEBUG: Next_point_is_reached:1
+[Flight Controller] Info Cargo locked
+[Flight Controller] Info Set speed 2 m/s
+[Flight Controller] Info Set speed 2 m/s
+[Flight Controller] Info Set speed 2 m/s
+[Flight Controller] DEBUG: Next_point_is_reached:2
+[Flight Controller] Info Mission is paused
+[Flight Controller] Info Mission resumed
+[Flight Controller] Info Set speed 2 m/s
+[Flight Controller] DEBUG: Next_point_is_reached:3
+[Flight Controller] Info Set speed 2 m/s
+[Flight Controller] DEBUG: Drone altitude = 7121, wp altitude = 7079, dif = 42
+[Flight Controller] DEBUG: ALT IS CHANGED!
+[Flight Controller] DEBUG: Drone altitude = 7183, wp altitude = 7079, dif = 104
+[Flight Controller] DEBUG: ALT IS CHANGED!
+[Flight Controller] DEBUG: Drone altitude = 7225, wp altitude = 7079, dif = 146
+[Flight Controller] DEBUG: ALT IS CHANGED!
+[Flight Controller] DEBUG: Drone altitude = 7237, wp altitude = 7079, dif = 158
+[Flight Controller] DEBUG: ALT IS CHANGED!
+[Flight Controller] DEBUG: Drone altitude = 7239, wp altitude = 7079, dif = 160
+[Flight Controller] DEBUG: ALT IS CHANGED!
+[Flight Controller] DEBUG: Drone altitude = 7226, wp altitude = 7079, dif = 147
+[Flight Controller] DEBUG: ALT IS CHANGED!
+[Flight Controller] DEBUG: Drone altitude = 7208, wp altitude = 7079, dif = 129
+[Flight Controller] DEBUG: ALT IS CHANGED!
+[Flight Controller] DEBUG: Drone altitude = 7184, wp altitude = 7079, dif = 105
+[Flight Controller] DEBUG: ALT IS CHANGED!
+[Flight Controller] DEBUG: Drone altitude = 7157, wp altitude = 7079, dif = 78
+[Flight Controller] DEBUG: ALT IS CHANGED!
+[Flight Controller] DEBUG: Drone altitude = 7131, wp altitude = 7079, dif = 52
+[Flight Controller] DEBUG: ALT IS CHANGED!
+[Flight Controller] DEBUG: Drone altitude = 7120, wp altitude = 7079, dif = 41
+[Flight Controller] DEBUG: ALT IS CHANGED!
+[Flight Controller] Info Set speed 2 m/s
+[Flight Controller] Info Set speed 2 m/s
+[Flight Controller] DEBUG: Next_point_is_reached:4
+[Flight Controller] DEBUG: Next_point_is_reached:5
+[Flight Controller] Info Set speed 2 m/s
+[Flight Controller] DEBUG: Next_point_is_reached:6
+[Flight Controller] Info Set speed 2 m/s
+[Flight Controller] Info Set speed 2 m/s
+[Flight Controller] Info Set speed 2 m/s
+[Flight Controller] DEBUG: Next_point_is_reached:7
+[Flight Controller] Info Set speed 2 m/s
+[Flight Controller] Info Set speed 2 m/s
+[Flight Controller] Info Set speed 2 m/s
+[Flight Controller] DEBUG: Next_point_is_reached:8
+[Flight Controller] DEBUG: Drone altitude = 7105, wp altitude = 6999, dif = 106
+[Flight Controller] DEBUG: ALT IS CHANGED!
+[Flight Controller] Info Cargo unlocked
+[Flight Controller] DEBUG: Next_point_is_reached:9
+[Flight Controller] DEBUG: Next_point_is_reached:10
+[Flight Controller] Info Cargo locked
+[Flight Controller] Info Set speed 2 m/s
+[Flight Controller] Info Set speed 2 m/s
+[Flight Controller] DEBUG: KILL SWITCH DIRECTION
+[Flight Controller] DEBUG: dist = 22.01138, prev_dist = 0.63792
+
+
+
+

@@ -1,0 +1,51 @@
+Connect tcp:127.0.0.1:5760 source_system=255
+Log Directory: 
+Telemetry log: mav.tlog
+Waiting for heartbeat from tcp:127.0.0.1:5760
+MAV> link 1 down
+AP: ArduCopter V4.4.4 (ff132ae2)
+AP: 545705c16a83407ba581da12f966e2d8
+AP: Frame: QUAD/PLUS
+AP: ArduCopter V4.4.4 (ff132ae2)
+AP: 545705c16a83407ba581da12f966e2d8
+AP: Frame: QUAD/PLUS
+AP: Calibrating barometer
+Detected vehicle 1:1 on link 0
+link 1 OK
+online system 1
+STABILIZE> Mode STABILIZE
+AP: ArduCopter V4.4.4 (ff132ae2)
+AP: 545705c16a83407ba581da12f966e2d8
+AP: Frame: QUAD/PLUS
+AP: ArduCopter V4.4.4 (ff132ae2)
+AP: 545705c16a83407ba581da12f966e2d8
+AP: Frame: QUAD/PLUS
+AP: Barometer 1 calibration complete
+AP: Barometer 2 calibration complete
+Init Gyro**Received 1339 parameters (ftp)
+Saved 1339 parameters to mav.parm
+
+AP: ArduPilot Ready
+AP: AHRS: DCM active
+AP: RC7: SaveWaypoint LOW
+fence present
+AP: EKF3 IMU0 initialised
+AP: EKF3 IMU1 initialised
+AP: AHRS: EKF3 active
+AP: EKF3 IMU1 tilt alignment complete
+AP: EKF3 IMU0 tilt alignment complete
+AP: EKF3 IMU0 MAG0 initial yaw alignment complete
+AP: EKF3 IMU1 MAG0 initial yaw alignment complete
+Flight battery 100 percent
+AP: GPS 1: detected as u-blox at 230400 baud
+AP: EKF3 IMU0 origin set
+AP: EKF3 IMU1 origin set
+AP: Field Elevation Set: 69m
+AP: EKF3 IMU1 is using GPS
+AP: EKF3 IMU0 is using GPS
+Flight battery 100 percent
+Flight battery 100 percent
+AP: got MISSION_ITEM; GCS should send MISSION_ITEM_INT
+Got MISSION_ACK: TYPE_MISSION: ACCEPTED
+AP: Flight plan received
+Mission is stale

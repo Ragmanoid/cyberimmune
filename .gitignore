@@ -58,7 +58,7 @@ mav.tlog.raw
 
 # ardupilot cache
 eeprom.bin
-logs
 terrain
+/ardupilot/logs
 
 mavproxy

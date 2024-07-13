@@ -188,7 +188,7 @@ int main(void) {
                 }
         }
 
-        if (nextWaypointIdx > 2 && !speedIsSetted) {
+        if (nextWaypointIdx > 1 && !speedIsSetted) {
             if (changeSpeed(2))
                 speedIsSetted = true;
         }
@@ -199,8 +199,8 @@ int main(void) {
                 return EXIT_FAILURE;
 
         // Валидация позиции в ширину
-        // if(!validatePosition(copter.currentPosition, absolutePositions[nextWaypointIdx - 1], absolutePositions[nextWaypointIdx]))
-        //     return EXIT_FAILURE;
+        if(!validatePosition(copter.currentPosition, absolutePositions[nextWaypointIdx - 1], absolutePositions[nextWaypointIdx]))
+            return EXIT_FAILURE;
 
         // Валидация выполнения полетного задания
         if(!validateDirection(copter.currentPosition, absolutePositions[nextWaypointIdx]))

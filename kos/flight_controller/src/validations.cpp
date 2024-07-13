@@ -8,7 +8,7 @@
 
 #define INACCURACY_CARGO 5 // Погрешность расстояния до сброса, м
 #define MAX_SPEED 2 // Максимальная скорость, м/c
-#define MAX_PERMITTED_DIST_KILL_SWITCH 6 // Максимальное отклонение от траектории для выключения, м
+#define MAX_PERMITTED_DIST_KILL_SWITCH 10 // Максимальное отклонение от траектории для выключения, м
 #define MAX_PERMITTED_DIST_CHANGE_WP 1 // Максимальное отклонение от траектории для выключения, м
 #define MAX_ALT_DIF 30 // Погрешность высоты для переноса точки, см
 #define MAX_ALT_KILL_SWITCH 200 // Погрешность высоты для выключения двигателей, см
@@ -49,6 +49,7 @@ int validateSpeed(DynamicPosition position) {
     if (currentSpeed > MAX_SPEED) {
         changeSpeed(MAX_SPEED);
         sendLogs("Set_speed");
+        fprintf(stderr, "[%s] Info Set speed 2 m/s\n", ENTITY_NAME);
     } 
 
     return 1;
@@ -76,13 +77,15 @@ int validateCargo(DynamicPosition position, Position cargo) {
     if (lastCargoValue != currentCargoValue) {
         if (setCargoLock(currentCargoValue)) {
             lastCargoValue = currentCargoValue;
-            if (currentCargoValue)
-            {
+            if (currentCargoValue) {
+                fprintf(stderr, "[%s] Info Cargo unlocked\n", ENTITY_NAME);
                 sendLogs("Cargo_unlocked");
                 killSwitchIsPermitted = 1;
             }
-            else
+            else {
+                fprintf(stderr, "[%s] Info Cargo locked\n", ENTITY_NAME);
                 sendLogs("Cargo_locked");
+            }
         }
     }
 
