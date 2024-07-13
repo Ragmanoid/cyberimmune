@@ -1,0 +1,116 @@
+13.07.2024 6:57:08 : med
+13.07.2024 6:57:08 : Info: Impossible to pause flight - copter is disar
+13.07.2024 6:56:57 : Mission: 1 Takeoff
+13.07.2024 6:56:57 : Crash: Disarming: AngErr=168>30, Accel=0.5<3.0
+13.07.2024 6:56:54 : Mission: 14 WP
+13.07.2024 6:56:54 : Mission: 13 SetServo
+13.07.2024 6:56:54 : Reached command #12
+13.07.2024 6:56:54 : Mission: 12 WP
+13.07.2024 6:56:54 : Mission: 11 SetServo
+13.07.2024 6:56:54 : Reached command #10
+13.07.2024 6:56:54 : Mission: 10 WP
+13.07.2024 6:56:54 : Reached command #9
+13.07.2024 6:56:49 : Auto mission changed, restarted command
+13.07.2024 6:56:49 : Mission: 9 WP
+13.07.2024 6:56:49 : Mission: 9 WP
+13.07.2024 6:56:49 : Info: changing altitude to 0 m
+13.07.2024 6:56:49 : Info: Request to change altitude
+13.07.2024 6:56:20 : Mission: 9 WP
+13.07.2024 6:56:20 : Reached command #8
+13.07.2024 6:56:11 : Mission: 8 WP
+13.07.2024 6:56:11 : Reached command #7
+13.07.2024 6:55:51 : EKF3 IMU1 MAG0 ground mag anomaly, yaw re-aligned
+13.07.2024 6:55:51 : EKF3 IMU0 MAG0 ground mag anomaly, yaw re-aligned
+13.07.2024 6:55:49 : Mission: 7 WP
+13.07.2024 6:55:49 : Reached command #6
+13.07.2024 6:55:42 : Mission: 6 WP
+13.07.2024 6:55:42 : Reached command #5
+13.07.2024 6:55:26 : Mission: 0 SetServo
+13.07.2024 6:55:26 : Info: trying to drop cargo at current location
+13.07.2024 6:55:19 : Mission: 5 WP
+13.07.2024 6:55:19 : Reached command #4
+13.07.2024 6:55:17 : Auto mission changed, restarted command
+13.07.2024 6:55:17 : Mission: 4 WP
+13.07.2024 6:55:17 : Mission: 4 WP
+13.07.2024 6:55:17 : Info: changing altitude to 1 m
+13.07.2024 6:55:17 : Info: Request to change altitude
+13.07.2024 6:55:14 : Auto mission changed, restarted command
+13.07.2024 6:55:13 : Mission: 4 WP
+13.07.2024 6:55:13 : Mission: 4 WP
+13.07.2024 6:55:13 : Info: changing altitude to 1 m
+13.07.2024 6:55:13 : Info: Request to change altitude
+13.07.2024 6:55:12 : Auto mission changed, restarted command
+13.07.2024 6:55:12 : Mission: 4 WP
+13.07.2024 6:55:12 : Mission: 4 WP
+13.07.2024 6:55:12 : Info: changing altitude to 3 m
+13.07.2024 6:55:05 : Mission: 4 WP
+13.07.2024 6:54:50 : Delaying 15 sec
+13.07.2024 6:54:50 : Mission: 3 Delay
+13.07.2024 6:54:45 : Mission: 2 Takeoff
+13.07.2024 6:54:45 : Mission: 2 Takeoff
+13.07.2024 6:54:45 : Mission: 2 Takeoff
+13.07.2024 6:54:45 : Mission: 1 Takeoff
+13.07.2024 6:54:45 : Info: Arm request is sent to KOS
+13.07.2024 6:54:45 : Info: Request to resume flight
+13.07.2024 6:54:39 : Info: Request to pause flight
+13.07.2024 6:54:33 : Delaying 15 sec
+13.07.2024 6:54:33 : Mission: 3 Delay
+13.07.2024 6:54:33 : Reached command #2
+13.07.2024 6:54:29 : Info: Autopilot refuses to change speed
+13.07.2024 6:54:00 : Mission: 2 WP
+13.07.2024 6:53:57 : Mission: 1 Takeoff
+13.07.2024 6:53:57 : Mission: 1 Takeoff
+13.07.2024 6:53:52 : Info: Arm request is sent to KOS
+13.07.2024 6:53:45 : Info: Autopilot refuses to change speed
+13.07.2024 6:53:43 : Info: Arm is permitted
+13.07.2024 6:53:41 : EKF3 IMU1 is using GPS
+13.07.2024 6:53:41 : EKF3 IMU0 is using GPS
+13.07.2024 6:53:40 : Info: Arm request is sent to KOS
+13.07.2024 6:53:33 : Flight plan received
+13.07.2024 6:53:27 : 115721, 300
+13.07.2024 6:53:27 : Info: changing current waypoint to 466144291, 1428
+13.07.2024 6:53:25 : Field Elevation Set: 79m
+13.07.2024 6:53:25 : EKF3 IMU1 origin set
+13.07.2024 6:53:25 : EKF3 IMU0 origin set
+13.07.2024 6:53:23 : u-blox 1 HW: 000A0000 SW: ROM SPG 5.10 (7b202e)
+13.07.2024 6:53:09 : Mission: 0 ChangeSpeed
+13.07.2024 6:53:09 : Info: changing speed to 4 m/s
+13.07.2024 6:53:08 : GPS 1: detected as u-blox at 230400 baud
+13.07.2024 6:53:05 : EKF3 IMU1 MAG0 initial yaw alignment complete
+13.07.2024 6:53:05 : EKF3 IMU0 MAG0 initial yaw alignment complete
+13.07.2024 6:53:05 : EKF3 IMU1 tilt alignment complete
+13.07.2024 6:53:05 : EKF3 IMU0 tilt alignment complete
+13.07.2024 6:53:04 : AHRS: EKF3 active
+13.07.2024 6:53:04 : EKF3 IMU1 initialised
+13.07.2024 6:53:04 : EKF3 IMU0 initialised
+13.07.2024 6:53:04 : KOS Command Message Error: Unknown message head
+13.07.2024 6:53:04 : KOS Command Message Error: Unknown message head
+13.07.2024 6:53:03 : KOS Command Message Error: Unknown message head
+13.07.2024 6:53:03 : KOS Command Message Error: Unknown message head
+13.07.2024 6:53:03 : PreArm: AHRS: not using configured AHRS type
+13.07.2024 6:53:03 : KOS Command Message Error: Unknown message head
+13.07.2024 6:53:03 : KOS Command Message Error: Unknown message head
+13.07.2024 6:53:03 : KOS Command Message Error: Unknown message head
+13.07.2024 6:53:02 : KOS Command Message Error: Unknown message head
+13.07.2024 6:53:02 : KOS Command Message Error: Unknown message head
+13.07.2024 6:53:02 : RCOut: DS600:1-4 PWM:5-9
+13.07.2024 6:53:02 : AHRS: DCM active
+13.07.2024 6:53:02 : ArduPilot Ready
+13.07.2024 6:52:57 : Initialising ArduPilot
+13.07.2024 6:52:52 : Initialising ArduPilot
+13.07.2024 6:52:47 : Initialising ArduPilot
+13.07.2024 6:52:47 : Frame: QUAD/X
+13.07.2024 6:52:46 : RCOut: Initialising
+13.07.2024 6:52:46 : SkystarsH7HD-bdshot 00250039 31335105 32323430
+13.07.2024 6:52:46 : ChibiOS: 17a50e3a
+13.07.2024 6:52:46 : ArduCopter V4.4.4 (ff132ae2)
+13.07.2024 6:52:46 : Frame: QUAD/X
+13.07.2024 6:52:46 : RCOut: Initialising
+13.07.2024 6:52:46 : SkystarsH7HD-bdshot 00250039 31335105 32323430
+13.07.2024 6:52:46 : ChibiOS: 17a50e3a
+13.07.2024 6:52:46 : ArduCopter V4.4.4 (ff132ae2)
+13.07.2024 6:52:46 : Frame: QUAD/X
+13.07.2024 6:52:46 : RCOut: Initialising
+13.07.2024 6:52:46 : SkystarsH7HD-bdshot 00250039 31335105 32323430
+13.07.2024 6:52:46 : ChibiOS: 17a50e3a
+13.07.2024 6:52:46 : ArduCopter V4.4.4 (ff132ae2)
