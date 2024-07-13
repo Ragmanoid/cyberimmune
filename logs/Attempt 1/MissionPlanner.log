@@ -1,0 +1,185 @@
+13.07.2024 5:28:41 : Mission: 0 ChangeSpeed
+13.07.2024 5:28:41 : Info: changing speed to 2 m/s
+13.07.2024 5:28:41 : Info: Request to change speed
+13.07.2024 5:28:37 : Mission: 14 WP
+13.07.2024 5:28:37 : Mission: 13 SetServo
+13.07.2024 5:28:37 : Reached command #12
+13.07.2024 5:28:37 : Mission: 12 WP
+13.07.2024 5:28:37 : Mission: 11 SetServo
+13.07.2024 5:28:37 : Reached command #10
+13.07.2024 5:28:37 : Mission: 10 WP
+13.07.2024 5:28:37 : Reached command #9
+13.07.2024 5:28:33 : Mission: 0 ChangeSpeed
+13.07.2024 5:28:33 : Info: changing speed to 2 m/s
+13.07.2024 5:28:33 : Info: Request to change speed
+13.07.2024 5:28:31 : Mission: 0 ChangeSpeed
+13.07.2024 5:28:31 : Info: changing speed to 2 m/s
+13.07.2024 5:28:31 : Info: Request to change speed
+13.07.2024 5:28:29 : Mission: 0 ChangeSpeed
+13.07.2024 5:28:29 : Info: changing speed to 2 m/s
+13.07.2024 5:28:29 : Info: Request to change speed
+13.07.2024 5:28:26 : Mission: 0 ChangeSpeed
+13.07.2024 5:28:26 : Info: changing speed to 2 m/s
+13.07.2024 5:28:26 : Info: Request to change speed
+13.07.2024 5:28:25 : Mission: 0 ChangeSpeed
+13.07.2024 5:28:25 : Info: changing speed to 2 m/s
+13.07.2024 5:28:25 : Info: Request to change speed
+13.07.2024 5:28:25 : Auto mission changed, restarted command
+13.07.2024 5:28:25 : Mission: 9 WP
+13.07.2024 5:28:25 : Mission: 9 WP
+13.07.2024 5:28:25 : Info: changing altitude to 1 m
+13.07.2024 5:28:25 : Info: Request to change altitude
+13.07.2024 5:28:24 : Mission: 0 ChangeSpeed
+13.07.2024 5:28:24 : Info: changing speed to 2 m/s
+13.07.2024 5:28:24 : Info: Request to change speed
+13.07.2024 5:28:21 : Mission: 0 ChangeSpeed
+13.07.2024 5:28:21 : Info: changing speed to 2 m/s
+13.07.2024 5:28:21 : Info: Request to change speed
+13.07.2024 5:28:21 : Mission: 9 WP
+13.07.2024 5:28:21 : Reached command #8
+13.07.2024 5:28:20 : Mission: 0 ChangeSpeed
+13.07.2024 5:28:20 : Info: changing speed to 2 m/s
+13.07.2024 5:28:20 : Info: Request to change speed
+13.07.2024 5:28:19 : Mission: 0 ChangeSpeed
+13.07.2024 5:28:19 : Info: changing speed to 2 m/s
+13.07.2024 5:28:19 : Info: Request to change speed
+13.07.2024 5:28:17 : Mission: 8 WP
+13.07.2024 5:28:17 : Reached command #7
+13.07.2024 5:28:11 : Mission: 0 ChangeSpeed
+13.07.2024 5:28:11 : Info: changing speed to 4 m/s
+13.07.2024 5:28:07 : EKF3 IMU1 MAG0 ground mag anomaly, yaw re-aligned
+13.07.2024 5:28:07 : EKF3 IMU0 MAG0 ground mag anomaly, yaw re-aligned
+13.07.2024 5:28:05 : Mission: 7 WP
+13.07.2024 5:28:05 : Reached command #6
+13.07.2024 5:27:58 : Mission: 6 WP
+13.07.2024 5:27:58 : Reached command #5
+13.07.2024 5:27:42 : Mission: 0 SetServo
+13.07.2024 5:27:42 : Info: trying to drop cargo at current location
+13.07.2024 5:27:40 : Info: Request to change altitude
+13.07.2024 5:27:39 : Auto mission changed, restarted command
+13.07.2024 5:27:39 : Mission: 5 WP
+13.07.2024 5:27:39 : Mission: 5 WP
+13.07.2024 5:27:39 : Info: changing altitude to 1 m
+13.07.2024 5:27:39 : Info: Request to change altitude
+13.07.2024 5:27:35 : Mission: 5 WP
+13.07.2024 5:27:35 : Reached command #4
+13.07.2024 5:27:33 : Auto mission changed, restarted command
+13.07.2024 5:27:33 : Mission: 4 WP
+13.07.2024 5:27:33 : Mission: 4 WP
+13.07.2024 5:27:33 : Info: changing altitude to 1 m
+13.07.2024 5:27:33 : Info: Request to change altitude
+13.07.2024 5:27:32 : Auto mission changed, restarted command
+13.07.2024 5:27:32 : Mission: 4 WP
+13.07.2024 5:27:32 : Mission: 4 WP
+13.07.2024 5:27:32 : Info: changing altitude to 1 m
+13.07.2024 5:27:32 : Info: Request to change altitude
+13.07.2024 5:27:32 : Auto mission changed, restarted command
+13.07.2024 5:27:32 : Mission: 4 WP
+13.07.2024 5:27:31 : Mission: 4 WP
+13.07.2024 5:27:31 : Info: changing altitude to 1 m
+13.07.2024 5:27:31 : Info: Request to change altitude
+13.07.2024 5:27:31 : Auto mission changed, restarted command
+13.07.2024 5:27:31 : Mission: 4 WP
+13.07.2024 5:27:31 : Mission: 4 WP
+13.07.2024 5:27:31 : Info: changing altitude to 1 m
+13.07.2024 5:27:31 : Info: Request to change altitude
+13.07.2024 5:27:30 : Auto mission changed, restarted command
+13.07.2024 5:27:30 : Mission: 4 WP
+13.07.2024 5:27:30 : Mission: 4 WP
+13.07.2024 5:27:30 : Info: changing altitude to 1 m
+13.07.2024 5:27:30 : Info: Request to change altitude
+13.07.2024 5:27:29 : Auto mission changed, restarted command
+13.07.2024 5:27:29 : Mission: 4 WP
+13.07.2024 5:27:29 : Mission: 4 WP
+13.07.2024 5:27:29 : Info: changing altitude to 1 m
+13.07.2024 5:27:29 : Info: Request to change altitude
+13.07.2024 5:27:29 : Auto mission changed, restarted command
+13.07.2024 5:27:29 : Mission: 4 WP
+13.07.2024 5:27:29 : Mission: 4 WP
+13.07.2024 5:27:29 : Info: changing altitude to 1 m
+13.07.2024 5:27:29 : Info: Request to change altitude
+13.07.2024 5:27:28 : Auto mission changed, restarted command
+13.07.2024 5:27:28 : Mission: 4 WP
+13.07.2024 5:27:28 : Mission: 4 WP
+13.07.2024 5:27:28 : Info: changing altitude to 1 m
+13.07.2024 5:27:28 : Info: Request to change altitude
+13.07.2024 5:27:27 : Auto mission changed, restarted command
+13.07.2024 5:27:27 : Mission: 4 WP
+13.07.2024 5:27:27 : Mission: 4 WP
+13.07.2024 5:27:27 : Info: changing altitude to 1 m
+13.07.2024 5:27:27 : Info: Request to change altitude
+13.07.2024 5:27:26 : Auto mission changed, restarted command
+13.07.2024 5:27:26 : Mission: 4 WP
+13.07.2024 5:27:26 : Mission: 4 WP
+13.07.2024 5:27:26 : Info: changing altitude to 1 m
+13.07.2024 5:27:26 : Info: Request to change altitude
+13.07.2024 5:27:26 : Auto mission changed, restarted command
+13.07.2024 5:27:26 : Mission: 4 WP
+13.07.2024 5:27:26 : Mission: 4 WP
+13.07.2024 5:27:26 : Info: changing altitude to 1 m
+13.07.2024 5:27:26 : Info: Request to change altitude
+13.07.2024 5:27:25 : Auto mission changed, restarted command
+13.07.2024 5:27:25 : Mission: 4 WP
+13.07.2024 5:27:25 : Mission: 4 WP
+13.07.2024 5:27:25 : Info: changing altitude to 1 m
+13.07.2024 5:27:25 : Info: Request to change altitude
+13.07.2024 5:27:23 : Auto mission changed, restarted command
+13.07.2024 5:27:23 : Mission: 4 WP
+13.07.2024 5:27:23 : Mission: 4 WP
+13.07.2024 5:27:23 : Info: changing altitude to 1 m
+13.07.2024 5:27:23 : Info: Request to change altitude
+13.07.2024 5:27:22 : Auto mission changed, restarted command
+13.07.2024 5:27:22 : Mission: 4 WP
+13.07.2024 5:27:22 : Mission: 4 WP
+13.07.2024 5:27:22 : Info: changing altitude to 1 m
+13.07.2024 5:27:22 : Info: Request to change altitude
+13.07.2024 5:27:20 : Auto mission changed, restarted command
+13.07.2024 5:27:20 : Mission: 4 WP
+13.07.2024 5:27:20 : Mission: 4 WP
+13.07.2024 5:27:20 : Info: changing altitude to 3 m
+13.07.2024 5:27:14 : Mission: 4 WP
+13.07.2024 5:26:59 : Delaying 15 sec
+13.07.2024 5:26:59 : Mission: 3 Delay
+13.07.2024 5:26:54 : Mission: 2 Takeoff
+13.07.2024 5:26:54 : Mission: 2 Takeoff
+13.07.2024 5:26:54 : Mission: 2 Takeoff
+13.07.2024 5:26:54 : Mission: 1 Takeoff
+13.07.2024 5:26:54 : Info: Arm request is sent to KOS
+13.07.2024 5:26:54 : Info: Request to resume flight
+13.07.2024 5:26:48 : Info: Request to pause flight
+13.07.2024 5:26:47 : Delaying 15 sec
+13.07.2024 5:26:47 : Mission: 3 Delay
+13.07.2024 5:26:47 : Reached command #2
+13.07.2024 5:26:41 : Mission: 0 ChangeSpeed
+13.07.2024 5:26:41 : Info: changing speed to 2 m/s
+13.07.2024 5:26:41 : Info: Request to change speed
+13.07.2024 5:26:11 : Mission: 2 WP
+13.07.2024 5:26:08 : Mission: 1 Takeoff
+13.07.2024 5:26:08 : Mission: 1 Takeoff
+13.07.2024 5:26:03 : Info: Arm request is sent to KOS
+13.07.2024 5:25:55 : ion
+13.07.2024 5:25:55 : Info: Impossible to change speed -- no active miss
+13.07.2024 5:25:54 : Info: Arm is permitted
+13.07.2024 5:25:50 : Info: Arm request is sent to KOS
+13.07.2024 5:25:47 : EKF3 IMU1 is using GPS
+13.07.2024 5:25:47 : EKF3 IMU0 is using GPS
+13.07.2024 5:25:47 : Flight plan received
+13.07.2024 5:25:17 : u-blox 1 HW: 000A0000 SW: ROM SPG 5.10 (7b202e)
+13.07.2024 5:25:17 : Frame: QUAD/X
+13.07.2024 5:25:17 : RCOut: DS600:1-4 PWM:5-9
+13.07.2024 5:25:17 : SkystarsH7HD-bdshot 00250039 31335105 32323430
+13.07.2024 5:25:17 : ChibiOS: 17a50e3a
+13.07.2024 5:25:17 : ArduCopter V4.4.4 (ff132ae2)
+13.07.2024 5:25:16 : Frame: QUAD/X
+13.07.2024 5:25:16 : RCOut: DS600:1-4 PWM:5-9
+13.07.2024 5:25:16 : SkystarsH7HD-bdshot 00250039 31335105 32323430
+13.07.2024 5:25:16 : ChibiOS: 17a50e3a
+13.07.2024 5:25:16 : ArduCopter V4.4.4 (ff132ae2)
+13.07.2024 5:25:15 : Frame: QUAD/X
+13.07.2024 5:25:15 : RCOut: DS600:1-4 PWM:5-9
+13.07.2024 5:25:15 : SkystarsH7HD-bdshot 00250039 31335105 32323430
+13.07.2024 5:25:15 : ChibiOS: 17a50e3a
+13.07.2024 5:25:15 : ArduCopter V4.4.4 (ff132ae2)
+13.07.2024 5:25:12 : Field Elevation Set: 77m
+13.07.2024 5:25:12 : EKF3 IMU1 origin set
+13.07.2024 5:25:12 : EKF3 IMU0 origin set
