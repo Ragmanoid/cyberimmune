@@ -196,8 +196,8 @@ int main(void) {
                 return EXIT_FAILURE;
 
         // Валидация позиции в ширину
-        if(!validatePosition(copter.currentPosition, absolutePositions[nextWaypointIdx - 1], absolutePositions[nextWaypointIdx]))
-            return EXIT_FAILURE;
+        // if(!validatePosition(copter.currentPosition, absolutePositions[nextWaypointIdx - 1], absolutePositions[nextWaypointIdx]))
+        //     return EXIT_FAILURE;
 
         // Валидация выполнения полетного задания
         validateDirection(copter);

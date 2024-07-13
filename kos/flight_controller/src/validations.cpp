@@ -30,12 +30,12 @@ int killSwitchIsPermitted = 0;
 int validateSpeed(DynamicPosition position) {
     double currentSpeed = getCurrentSpeed(position);
 
-    if (currentTime() - lastSpeedLogTime > 5000) {
-        char msg[100] = {0}; 
-        snprintf(msg, 100, "Current_speed:%.2f_Current_alt:%d", currentSpeed, position.currentPosition.altitude);
-        sendLogs(msg);
-        lastSpeedLogTime = currentTime();
-    }
+    // if (currentTime() - lastSpeedLogTime > 5000) {
+    //     char msg[100] = {0}; 
+    //     snprintf(msg, 100, "Current_speed:%.2f_Current_alt:%d", currentSpeed, position.currentPosition.altitude);
+    //     sendLogs(msg);
+    //     lastSpeedLogTime = currentTime();
+    // }
 
     if (LOG_SPEED) {
         fprintf(stderr, "[%s] DEBUG: Current speed: %.5f\n",
@@ -196,7 +196,7 @@ int validateAltitude(Position dronePosition, Position nextWaypoint)
 int validateDirection(DynamicPosition copter)
 {
     static int error_count = 0;
-    static double prev_dist = 1e9;
+    static double prev_dist = 0;
     double dist;
     if (currentTime() - lastDirectionTime > 700)
     {
@@ -223,6 +223,7 @@ int validateDirection(DynamicPosition copter)
             }
             return 0;
         }
+        prev_dist = dist;
     }
-    return 0;
+    return 1;
 }
