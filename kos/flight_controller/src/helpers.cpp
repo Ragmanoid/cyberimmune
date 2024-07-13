@@ -14,6 +14,8 @@ long double currentTime();
 long double lastUpdateTime = currentTime();
 long double checkPauseLastTime = currentTime();
 
+extern double min_dist;
+
 double toRadiansAngle(int coord) {
     return coord * 1e-7 * M_PI / 180;
 }
@@ -169,4 +171,9 @@ void sendLogs(char *log) {
     char message[512] = {0};
     snprintf(message, 512, "/api/logs?%s&log=%s", BOARD_ID, log);
     sendSignedMessage(message, "send_log", RETRY_DELAY_SEC);
+}
+
+void resetDistToNextPoint()
+{
+    min_dist = 1e9;
 }

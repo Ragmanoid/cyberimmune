@@ -42,3 +42,5 @@ bool needPauseMission(bool missionIsPaused);
 
 /// Отправка логов
 void sendLogs(char *message);
+
+void resetDistToNextPoint();

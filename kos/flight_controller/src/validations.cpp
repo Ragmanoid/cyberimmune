@@ -12,6 +12,7 @@
 #define MAX_PERMITTED_DIST_CHANGE_WP 1 // Максимальное отклонение от траектории для выключения, м
 #define MAX_ALT_DIF 50 // Погрешность высоты для переноса точки, см
 #define MAX_ALT_KILL_SWITCH 200 // Погрешность высоты для выключения двигателей, см
+#define DIST_TOLERANCE 3
 
 // Для включения/отключения логгирования
 #define LOG_SPEED 0
@@ -26,6 +27,8 @@ long double lastChangePositionTime = currentTime();
 long double lastSpeedLogTime = currentTime();
 long double lastDirectionTime = currentTime();
 int killSwitchIsPermitted = 0;
+
+double min_dist = 1e9;
 
 int validateSpeed(DynamicPosition position) {
     double currentSpeed = getCurrentSpeed(position);
@@ -193,20 +196,16 @@ int validateAltitude(Position dronePosition, Position nextWaypoint)
     return 1;
 }
 
-int validateDirection(DynamicPosition copter)
+int validateDirection(Position copter, Position nextWaypoint)
 {
     static int error_count = 0;
-    static double prev_dist = 0;
     double dist;
     if (currentTime() - lastDirectionTime > 700)
     {
         lastDirectionTime = currentTime();
-        dist = getDistance(copter.lastPosition, copter.currentPosition);
-        if (dist > prev_dist)
-            error_count++;
-        else 
-            error_count = 0;
-        if (dist > prev_dist && killSwitchIsPermitted)
+        dist = getDistance(copter, nextWaypoint);
+        //if (dist - min_dist > DIST_TOLERANCE && killSwitchIsPermitted)
+        if (dist - min_dist > DIST_TOLERANCE)
         {
             setKillSwitch(0);
             if (LOG_POS) {
@@ -218,12 +217,11 @@ int validateDirection(DynamicPosition copter)
                         ENTITY_NAME);
                 fprintf(stderr, "[%s] DEBUG: dist = %.5f, prev_dist = %.5f\n",
                         ENTITY_NAME,
-                        dist,
-                        prev_dist);
+                        dist);
             }
             return 0;
         }
-        prev_dist = dist;
+        if (dist < min_dist) min_dist = dist;
     }
     return 1;
 }

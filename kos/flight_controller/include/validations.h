@@ -15,4 +15,4 @@ int validatePosition(Position dronePosition, Position prevWaypoint, Position nex
 int validateAltitude(Position dronePosition, Position nextWaypoint);
 
 /// Валидатор отклонения от миссии
-int validateDirection(DynamicPosition copter);
+int validateDirection(Position copter, Position nextWaypoint);

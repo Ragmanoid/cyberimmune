@@ -145,6 +145,8 @@ int main(void) {
                 ENTITY_NAME,
                 waypointCount);
 
+    sendLogs("Mission started");
+
     while (true) {
         // Проверка на остановку миссии
         if (currentTime() - checkPauseLastTime > PAUSE_MISSION_CHECK_RATE_MS) {
@@ -177,6 +179,7 @@ int main(void) {
             double dist = getDistance(copter.currentPosition, absolutePositions[wpIdx]);
             if (dist < MAX_WAYPOINT_DIST && wpIdx < waypointCount) {
                     nextWaypointIdx = wpIdx + 1;
+                    resetDistToNextPoint();
                     char msg[100] = {0}; 
                     snprintf(msg, 100, "Next_point_is_reached:%d", wpIdx);
                     fprintf(stderr, "[%s] DEBUG: %s\n", ENTITY_NAME, msg);
@@ -200,7 +203,8 @@ int main(void) {
         //     return EXIT_FAILURE;
 
         // Валидация выполнения полетного задания
-        validateDirection(copter);
+        if(!validateDirection(copter.currentPosition, absolutePositions[nextWaypointIdx]))
+            return EXIT_FAILURE;
 
 
         // Валидация скорости
