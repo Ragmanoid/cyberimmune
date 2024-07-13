@@ -206,7 +206,7 @@ int validateDirection(DynamicPosition copter)
             error_count++;
         else 
             error_count = 0;
-        if (error_count > 3 && killSwitchIsPermitted)
+        if (dist > prev_dist && killSwitchIsPermitted)
         {
             setKillSwitch(0);
             if (LOG_POS) {
